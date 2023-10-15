@@ -36,6 +36,8 @@ require __DIR__.'/auth.php';
 Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], function(){
     Route::get('dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
+    Route::get('profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
+    Route::post('profile-update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
 });
 
 

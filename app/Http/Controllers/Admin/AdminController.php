@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -11,6 +12,13 @@ class AdminController extends Controller
     public function adminDashboard()
     {
         return view('backend.admin.index');
+    }
+
+    public function adminProfile()
+    {
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        return view('backend.admin.profile', compact('profileData'));
     }
 
     public function adminLogout(Request $request)
@@ -22,5 +30,17 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    public function adminProfileUpdate(Request $request)
+    {
+        $id = Auth::user()->id;
+        $data = User::find($id);
+        $data->name = $request->name;
+        $data->username = $request->username;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+
     }
 }
