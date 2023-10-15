@@ -72,38 +72,38 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="exampleInputUsername1" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="exampleInputUsername1"
+                                        <input type="text" name="username" value="{{ $profileData->username }}" class="form-control" id="exampleInputUsername1"
                                             autocomplete="off" placeholder="Username">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputUsername1" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="exampleInputUsername1"
+                                        <input type="text" name="name" value="{{ $profileData->name }}" class="form-control" id="exampleInputUsername1"
                                             autocomplete="off" placeholder="Name">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                        <input type="email" name="email" value="{{ $profileData->email }}" class="form-control" id="exampleInputEmail1"
                                             placeholder="Email">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputUsername1" class="form-label">Phone</label>
-                                        <input type="text" class="form-control" id="exampleInputUsername1"
+                                        <input type="text" name="phone" value="{{ $profileData->phone }}" class="form-control" id="exampleInputUsername1"
                                             autocomplete="off" placeholder="Phone">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputUsername1" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="exampleInputUsername1"
+                                        <input type="text" name="address" value="{{ $profileData->address }}" class="form-control" id="exampleInputUsername1"
                                             autocomplete="off" placeholder="Address">
                                     </div>
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Password</label>
                                         <input type="password" class="form-control" id="exampleInputPassword1"
                                             autocomplete="off" placeholder="Password">
-                                    </div>
+                                    </div> --}}
                                     {{-- Image Part --}}
                                     <div class="mb-3">
                                         <label class="form-label" for="formFile">Image upload</label>
-                                        <input class="form-control" type="file" id="image" accept="image/*">
+                                        <input class="form-control" type="file" name="photo" id="image" accept="image/*">
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="formFile"> </label>

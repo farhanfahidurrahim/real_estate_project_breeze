@@ -34,6 +34,7 @@ class AdminController extends Controller
 
     public function adminProfileUpdate(Request $request)
     {
+        //return $request->all();
         $id = Auth::user()->id;
         $data = User::find($id);
         $data->name = $request->name;
@@ -41,6 +42,17 @@ class AdminController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
+
+        if ($request->file('photo')) {
+            $file = $request->file('photo');
+            $filename = $request->username.'-'.date('dmY').'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('upload/images/admin'),$filename);
+            $data['photo'] = $filename;
+        }
+
+        $data->save();
+
+        return redirect()->back();
 
     }
 }
