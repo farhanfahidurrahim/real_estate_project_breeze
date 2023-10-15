@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Agent\AgentController;
+use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//___Frontend Route___
+Route::get('/', [UserController::class, 'index']);
+Route::get('/sign-in', [UserController::class, 'signIn'])->name('signin');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
