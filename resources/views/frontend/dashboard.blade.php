@@ -9,7 +9,7 @@
     <title>Realshed - HTML 5 Template Preview</title>
 
     <!-- Fav Icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ asset('frontend/assets/images/favicon.ico') }}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link
