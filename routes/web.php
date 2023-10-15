@@ -38,6 +38,8 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     Route::get('logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
     Route::get('profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
     Route::post('profile-update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
+    Route::get('password-change', [AdminController::class, 'adminPasswordChange'])->name('admin.password.change');
+    Route::post('password-update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
 });
 
 
