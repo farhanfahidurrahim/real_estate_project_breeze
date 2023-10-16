@@ -50,6 +50,12 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     Route::post('profile-update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
     Route::get('password-change', [AdminController::class, 'adminPasswordChange'])->name('admin.password.change');
     Route::post('password-update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
+    //get Agent in Admin
+    Route::get('all-agent', [AdminController::class, 'allAgent'])->name('all.agent');
+    Route::get('create-agent', [AdminController::class, 'createAgent'])->name('create.agent');
+    Route::post('store-agent', [AdminController::class, 'storeAgent'])->name('store.agent');
+    Route::get('destroy-agent/{id}', [AdminController::class, 'destroyAgent'])->name('destroy.agent');
+    Route::get('change-agent-status', [AdminController::class, 'statusChangeAgent']);
 });
 
 

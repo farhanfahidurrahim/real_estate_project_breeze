@@ -1,7 +1,20 @@
 @extends('backend.agent.dashboard')
 @section('agent')
+
+@php
+    $id = Auth::user()->id;
+    $data = App\Models\User::find($id);
+    $status = $data->status;
+@endphp
+
 <div class="page-content">
 
+    @if ($status === 'active')
+        <h4 class="mb-3 mb-md-0">Agent Accont : <span class="text-success">Active</span></h4>
+    @else
+        <h4 class="mb-3 mb-md-0">Agent Accont : <span class="text-danger">Inactive</span></h4>
+        <p>please wait for admin approval!</p>
+    @endif
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
             <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>

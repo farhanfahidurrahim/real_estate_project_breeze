@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class AdminController extends Controller
 {
@@ -107,5 +108,78 @@ class AdminController extends Controller
         );
 
         return back()->with($notification);
+    }
+
+    //---------------get Agent in Admin-------------
+
+    public function allAgent()
+    {
+        $agents = User::where('role','agent')->orderBy('id','desc')->get();
+        return view('backend.admin.manage_agent.index', compact('agents'));
+    }
+
+    public function createAgent()
+    {
+        return view('backend.admin.manage_agent.create');
+    }
+
+    public function storeAgent(Request $request)
+    {
+        // return $request->all();
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'role' => 'agent',
+            'status' => 'active',
+        ]);
+
+        $notification = array(
+            'message' => "Agent Created!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.agent')->with($notification);
+    }
+
+    public function destroyAgent($id)
+    {
+        $data = User::findOrFail($id);
+        @unlink(public_path('upload/images/agent/'.$data->photo));
+        $data->delete();
+
+        $notification = array(
+            'message' => "Agent Deleted!",
+            'alert-type' => 'danger',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function statusChangeAgent(Request $request)
+    {
+        //return $request->all();
+        $data = User::findOrFail($request->id);
+        $data->status = $request->status;
+        $data->save();
+
+        $notification = array(
+            'message' => "Status Change!",
+            'alert-type' => 'danger',
+        );
+
+        return response()->json([
+            'success' => "Status Change!",
+        ]);
     }
 }
