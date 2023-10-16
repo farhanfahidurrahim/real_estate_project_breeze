@@ -15,7 +15,7 @@ class AgentController extends Controller
 {
     public function agentDashboard()
     {
-        return view('backend.agent.dashboard');
+        return view('backend.agent.index');
     }
 
     public function agentLogin()
