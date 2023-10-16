@@ -41,7 +41,7 @@
                                         </div>
                                     </form>
                                     <div class="othre-text">
-                                        <p>Have not any account? <a href="signup.html">Register Now</a></p>
+                                        <p>Have not any account? <a href="">Register Now</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                         </div>
                                     </form>
                                     <div class="othre-text">
-                                        <p>Have not any account? <a href="signup.html">Register Now</a></p>
+                                        <p>Have any account? <a href="">Login Now</a></p>
                                     </div>
                                 </div>
                             </div>
