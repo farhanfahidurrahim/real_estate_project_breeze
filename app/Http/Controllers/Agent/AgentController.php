@@ -23,6 +23,22 @@ class AgentController extends Controller
         return view('backend.agent.login');
     }
 
+    public function agentLogout(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        $notification = array(
+            'message' => "Agent Logout!",
+            'alert-type' => 'error',
+        );
+
+        return redirect('/agent/login')->with($notification);
+    }
+
     public function agentRegister(Request $request)
     {
         $request->validate([
@@ -49,5 +65,40 @@ class AgentController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::AGENT);
+    }
+
+    public function agentProfile()
+    {
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        return view('backend.agent.profile', compact('profileData'));
+    }
+
+    public function agentProfileUpdate(Request $request)
+    {
+        //return $request->all();
+        $id = Auth::user()->id;
+        $data = User::find($id);
+        $data->name = $request->name;
+        $data->username = $request->username;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+
+        if ($request->file('photo')) {
+            $file = $request->file('photo');
+            @unlink(public_path('upload/images/agent/'.$data->photo));
+            $filename = $request->username.'-'.date('dmYHi').'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('upload/images/agent'),$filename);
+            $data['photo'] = $filename;
+        }
+
+        $data->save();
+        $notification = array(
+            'message' => "Agent Profile Updated Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
     }
 }

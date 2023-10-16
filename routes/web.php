@@ -59,4 +59,7 @@ Route::post('/agent/register', [AgentController::class, 'agentRegister'])->name(
 
 Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role:agent']], function(){
     Route::get('dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
+    Route::get('logout', [AgentController::class, 'agentLogout'])->name('agent.logout');
+    Route::get('profile', [AgentController::class, 'agentProfile'])->name('agent.profile');
+    Route::post('profile-update', [AgentController::class, 'agentProfileUpdate'])->name('agent.profile.update');
 });
