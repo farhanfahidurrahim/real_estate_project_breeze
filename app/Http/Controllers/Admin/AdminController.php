@@ -22,6 +22,11 @@ class AdminController extends Controller
         return view('backend.admin.profile', compact('profileData'));
     }
 
+    public function adminLogin()
+    {
+        return view('backend.admin.login');
+    }
+
     public function adminLogout(Request $request)
     {
         Auth::guard('web')->logout();
@@ -30,7 +35,7 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/admin-login');
     }
 
     public function adminProfileUpdate(Request $request)
