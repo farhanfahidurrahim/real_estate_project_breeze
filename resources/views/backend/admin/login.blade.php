@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/demo2/style.css') }}">
 
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.png') }}" />
+
+    <!-- Toastr css -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 </head>
 
 <body>
@@ -60,7 +63,7 @@
                                         <form method="POST" action="{{ route('login') }}" class="forms-sample">
                                             @csrf
                                             <div class="mb-3">
-                                                <label for="userEmail" class="form-label">Email address</label>
+                                                <label for="" class="form-label">Email address</label>
                                                 <input type="email" name="email"
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     placeholder="Email">
@@ -69,7 +72,7 @@
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <label for="userPassword" class="form-label">Password</label>
+                                                <label for="" class="form-label">Password</label>
                                                 <input type="password" name="password"
                                                     class="form-control @error('password') is-invalid @enderror"
                                                     placeholder="Password">
@@ -110,7 +113,32 @@
     <!-- inject:js -->
     <script src="{{ asset('backend/assets/vendors/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/template.js') }}"></script>
-    <!-- endinject -->
+
+    <!-- Toastr js -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if(Session::has('message'))
+            var type = "{{ Session::get('alert-type','info') }}"
+            switch(type){
+                case 'info':
+                toastr.info(" {{ Session::get('message') }} ");
+                break;
+
+                case 'success':
+                toastr.success(" {{ Session::get('message') }} ");
+                break;
+
+                case 'warning':
+                toastr.warning(" {{ Session::get('message') }} ");
+                break;
+
+                case 'error':
+                toastr.error(" {{ Session::get('message') }} ");
+                break;
+            }
+        @endif
+
+    </script>
 
 </body>
 

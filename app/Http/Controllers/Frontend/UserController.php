@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function signIn()
     {
-        return view('auth.login-f');
+        return view('auth.login');
     }
 
     public function userLogout(Request $request)
@@ -31,11 +31,11 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         $notification = array(
-            'message' => "User Logout Successfully!",
-            'alert-type' => 'success',
+            'message' => "User Logout!",
+            'alert-type' => 'error',
         );
 
-        return redirect('/login');
+        return redirect('/login')->with($notification);
     }
 
     public function editUserProfile()

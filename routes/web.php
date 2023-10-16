@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +41,7 @@ Route::group(['prefix'=>'user', 'middleware' => 'auth'], function(){
 require __DIR__.'/auth.php';
 
 //___Admin Route___
-Route::get('admin-login', [AdminController::class, 'adminLogin'])->name('admin.login');
+Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
 Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], function(){
     Route::get('dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
@@ -52,6 +54,9 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
 
 
 //___Agent Route___
+Route::get('/agent/login', [AgentController::class, 'agentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
+Route::post('/agent/register', [AgentController::class, 'agentRegister'])->name('agent.register');
+
 Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role:agent']], function(){
     Route::get('dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
 });
