@@ -62,4 +62,6 @@ Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role:agent']], functi
     Route::get('logout', [AgentController::class, 'agentLogout'])->name('agent.logout');
     Route::get('profile', [AgentController::class, 'agentProfile'])->name('agent.profile');
     Route::post('profile-update', [AgentController::class, 'agentProfileUpdate'])->name('agent.profile.update');
+    Route::get('password-change', [AgentController::class, 'agentPasswordChange'])->name('agent.password.change');
+    Route::post('password-update', [AgentController::class, 'agentPasswordUpdate'])->name('agent.password.update');
 });
