@@ -4,7 +4,7 @@
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <a href="{{ route('create.agent') }}" class="btn btn-inverse-info">Add New Agent</a></a>
+                <a href="{{ route('property-type.create') }}" class="btn btn-inverse-info">Add New Property Type</a></a>
             </ol>
         </nav>
 
@@ -12,36 +12,24 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        {{-- <h6 class="card-title">All Agent</h6> --}}
+                        {{-- <h6 class="card-title">All Property Type</h6> --}}
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Status</th>
+                                        <th>Property Type Name</th>
+                                        <th>Property Type Icon</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($agents as $row)
+                                    @foreach ($ptypes as $row)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $row->type_name }}</td>
+                                            <td>{{ $row->type_icon }}</td>
                                             <td>
-                                                <img
-                                                    src="{{ !empty($row->photo) ? url('upload/images/agent/' . $row->photo) : url('upload/images/no_image.jpg') }}">
-                                            </td>
-                                            <td>{{ $row->name }}</td>
-                                            <td>
-                                                <input data-id="{{ $row->id }}" class="toggleClass" type="checkbox"
-                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                    data-on="Active" data-off="Inactive"
-                                                    {{ $row->status ? 'checked' : '' }}>
-                                            </td>
-                                            <td>
-                                                <a href="" class="btn btn-inverse-info"><i data-feather="eye"></i>
-                                                </a>
                                                 <a href="" class="btn btn-inverse-warning"><i
                                                         data-feather="edit"></i> </a>
                                                 <a href="{{ route('destroy.agent', $row->id) }}"
@@ -94,8 +82,8 @@
                         })
                         if ($.isEmptyObject(data.error)) {
                             Toast.fire({
-                            type: 'success',
-                            title: data.success,
+                                type: 'success',
+                                title: data.success,
                             })
                         }
                     },
