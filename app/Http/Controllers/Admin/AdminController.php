@@ -173,11 +173,6 @@ class AdminController extends Controller
         $data->status = $request->status;
         $data->save();
 
-        $notification = array(
-            'message' => "Status Change!",
-            'alert-type' => 'danger',
-        );
-
         return response()->json([
             'success' => "Status Change!",
         ]);

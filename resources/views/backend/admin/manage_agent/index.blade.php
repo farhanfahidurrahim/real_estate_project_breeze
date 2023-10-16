@@ -26,22 +26,30 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($agents as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <img src="{{ !empty($row->photo) ? url('upload/images/agent/'.$row->photo) : url('upload/images/no_image.jpg') }}">
-                                        </td>
-                                        <td>{{ $row->name }}</td>
-                                        <td>
-                                            <input data-id="{{ $row->id }}" class="toggleClass" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $row->status ? 'checked' : '' }}>
-                                        </td>
-                                        </td>
-                                        <td>
-                                            <a href="" class="btn btn-inverse-info"><i data-feather="eye"></i> </a>
-                                            <a href="" class="btn btn-inverse-warning"><i data-feather="edit"></i> </a>
-                                            <a href="{{ route('destroy.agent',$row->id) }}" class="btn btn-inverse-danger" id="delete" title="Delete"><i data-feather="trash-2"></i> </a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <img
+                                                    src="{{ !empty($row->photo) ? url('upload/images/agent/' . $row->photo) : url('upload/images/no_image.jpg') }}">
+                                            </td>
+                                            <td>{{ $row->name }}</td>
+                                            <td>
+                                                <input data-id="{{ $row->id }}" class="toggleClass" type="checkbox"
+                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                                    data-on="Active" data-off="Inactive"
+                                                    {{ $row->status ? 'checked' : '' }}>
+                                            </td>
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-inverse-info"><i data-feather="eye"></i>
+                                                </a>
+                                                <a href="" class="btn btn-inverse-warning"><i
+                                                        data-feather="edit"></i> </a>
+                                                <a href="{{ route('destroy.agent', $row->id) }}"
+                                                    class="btn btn-inverse-danger" id="delete" title="Delete"><i
+                                                        data-feather="trash-2"></i> </a>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -52,36 +60,51 @@
         </div>
     </div>
 
-    @section('script')
-        <script>
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        </script>
+@section('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
-        <!-- Status Change -->
-        <script>
-            $(function(){
-                $('.toggleClass').change(function(){
-                    var status = $(this).prop('checked') == true ? 1 : 0;
-                    var status_id = $(this).data('id');
+    <!-- Status Change -->
+    <script>
+        $(function() {
+            $('.toggleClass').change(function() {
+                var status = $(this).prop('checked') == true ? 1 : 0;
+                // var status = $(this).prop('checked') ? 'active' : 'inactive';
+                var status_id = $(this).data('id');
 
-                    $.ajax({
-                        type: "GET",
-                        url: "/admin/change-agent-status",
-                        data:{
-                            'status' : status,
-                            'id' : status_id,
-                        },
-                        success: function(data){
-
-                        },
-                    })
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "/admin/change-agent-status",
+                    data: {
+                        'status': status,
+                        'id': status_id,
+                    },
+                    success: function(data) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                            type: 'success',
+                            title: data.success,
+                            })
+                        }
+                    },
                 })
+
             })
-        </script>
-    @endsection
+        })
+    </script>
+@endsection
 
 @endsection
