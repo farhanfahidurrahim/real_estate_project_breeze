@@ -8,6 +8,7 @@ use function Ramsey\Uuid\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -58,14 +59,6 @@ class UserController extends Controller
             $data['photo'] = $filename;
         }
 
-        // if ($request->file('photo')) {
-        //     $file = $request->file('photo');
-        //     @unlink(public_path('upload/images/admin/'.$data->photo));
-        //     $filename = $request->username.'-'.date('dmYHi').'.'.$file->getClientOriginalExtension();
-        //     $file->move(public_path('upload/images/admin'),$filename);
-        //     $data['photo'] = $filename;
-        // }
-
         $data->save();
         $notification = array(
             'message' => "User Profile Updated!",
@@ -73,5 +66,40 @@ class UserController extends Controller
         );
 
         return redirect()->back()->with($notification);
+    }
+
+    public function userPasswordChange()
+    {
+        return view('frontend.profile.password_change');
+    }
+
+    public function userPasswordUpdate(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        #Current Password Match Check
+        if (!Hash::check($request->current_password, auth::user()->password)) {
+            $notification = array(
+                'message' => "Current Password Not Match!",
+                'alert-type' => 'error',
+            );
+
+            return back()->with($notification);
+        }
+
+        //If match
+        User::whereId(auth::user()->id)->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        $notification = array(
+            'message' => "Password Change Successfully!",
+            'alert-type' => 'success',
+        );
+
+        return back()->with($notification);
     }
 }

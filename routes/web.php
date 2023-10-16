@@ -30,7 +30,9 @@ Route::get('/dashboard', function (){ return view('dashboard'); })->middleware([
 Route::group(['prefix'=>'user', 'middleware' => 'auth'], function(){
     Route::get('profile-edit', [UserController::class, 'editUserProfile'])->name('user.profile.edit');
     Route::post('profile-update', [UserController::class, 'updateUserProfile'])->name('user.profile.update');
-    Route::get('user-logout', [UserController::class, 'userLogout'])->name('user.logout');
+    Route::get('logout', [UserController::class, 'userLogout'])->name('user.logout');
+    Route::get('password-change', [UserController::class, 'userPasswordChange'])->name('user.password.change');
+    Route::post('password-update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
 });
 
 
