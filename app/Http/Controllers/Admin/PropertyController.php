@@ -37,7 +37,37 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ptype_id' => 'required',
+            'amenities_id' => 'required',
+            'property_name' => 'required',
+            'property_slug' => 'required',
+            'property_code' => 'required',
+            'property_status' => 'required',
+            'lowest_price' => 'required',
+            'maximum_price' => 'required',
+            'property_thumbnail' => 'required',
+            'short_description' => 'required',
+            'long_description' => 'required',
+            'bedrooms' => 'required',
+            'bathrooms' => 'required',
+            'garage' => 'required',
+            'garage_size' => 'required',
+            'property_size' => 'required',
+            'property_video' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'postal_code' => 'required',
+            'neighborhood' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'featured' => 'required',
+            'hot' => 'required',
+            'agent_id' => 'required',
+            'status' => 'required',
+        ]);
+        return $request->all();
     }
 
     /**

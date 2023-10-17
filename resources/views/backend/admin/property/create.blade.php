@@ -14,112 +14,160 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">Property</h6>
-                        <form>
+                        <form method="POST" action="{{ route('property.store') }}" enctype="multipart/form-data">
+                            @csrf
+
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Property Name</label>
-                                        <input type="text" name="" class="form-control"
+                                        <input type="text" name="property_name" value="{{ old('property_name') }}" class="form-control @error('property_name') is-invalid @enderror"
                                             placeholder="Enter first name">
+                                        @error('property_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Property Status</label>
-                                        <select class="form-select" name="" id="exampleFormControlSelect1">
+                                        <select name="property_status" value="{{ old('property_status') }}" class="form-select @error('property_status') is-invalid @enderror" id="exampleFormControlSelect1">
                                             <option selected="" disabled="">Select Status</option>
-                                            <option>12-18</option>
+                                            <option value="12" {{ old('property_status') == '12' ? 'selected' : '' }}>12</option>
+                                            <option value="18" {{ old('property_status') == '18' ? 'selected' : '' }}>18</option>
                                         </select>
+                                        @error('property_status')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                </div>
-                                <!-- Col -->
+                                </div><!-- Col -->
                             </div><!-- Row -->
+
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Lowest Price</label>
-                                        <input type="text" name="" class="form-control"
+                                        <input type="text" name="lowest_price" value="{{ old('lowest_price') }}" class="form-control @error('lowest_price') is-invalid @enderror"
                                             placeholder="Enter lowest price">
+                                        @error('lowest_price')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Maximum Price</label>
-                                        <input type="text" name="" class="form-control"
+                                        <input type="text" name="maximum_price" value="{{ old('maximum_price') }}" class="form-control @error('maximum_price') is-invalid @enderror"
                                             placeholder="Enter maximum price">
+                                        @error('maximum_price')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- Col -->
                             </div><!-- Row -->
+
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Main Thumbnail</label>
-                                        <input type="file" name="property_thumbnail" class="form-control"
+                                        <input type="file" name="property_thumbnail" class="form-control @error('property_thumbnail') is-invalid @enderror"
                                             onChange="mainThumbUrl(this)">
                                         <img src="" id="mainThumb">
+                                        @error('property_thumbnail')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- Col -->
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Multiple Image</label>
-                                        <input type="file" name="multi_img[]" class="form-control" id="multiImg"
+                                        <input type="file" name="multi_img[]" class="form-control @error('multi_img') is-invalid @enderror" id="multiImg"
                                             multiple="">
+                                            @error('multi_img')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         <div class="row" id="preview_img"></div>
                                     </div>
                                 </div>
                                 <!-- Col -->
                             </div><!-- Row -->
+
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Bedrooms</label>
-                                        <input type="text" class="form-control" placeholder="Enter bedrooms">
+                                        <input type="text" name="bedrooms" value="{{ old('bedrooms') }}" class="form-control @error('bedrooms') is-invalid @enderror" placeholder="Enter bedrooms">
+                                        @error('bedrooms')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Bathrooms</label>
-                                        <input type="text" class="form-control" placeholder="Enter bathrooms">
+                                        <input type="text" name="bathrooms" value="{{ old('bathrooms') }}" class="form-control @error('bathrooms') is-invalid @enderror" placeholder="Enter bathrooms">
+                                        @error('bathrooms')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Garage</label>
-                                        <input type="text" class="form-control" placeholder="Enter garage">
+                                        <input type="text" name="garage" value="{{ old('garage') }}" class="form-control @error('garage') is-invalid @enderror" placeholder="Enter garage">
+                                        @error('garage')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Garage Size</label>
-                                        <input type="text" class="form-control" placeholder="Enter garage size">
+                                        <input type="text" name="garage_size" value="{{ old('garage_size') }}" class="form-control @error('garage_size') is-invalid @enderror" placeholder="Enter garage size">
+                                        @error('garage_size')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                             </div><!-- Row -->
+
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Address</label>
-                                        <input type="text" class="form-control" placeholder="Enter address">
+                                        <input type="text" name="address" value="{{ old('address') }}" class="form-control @error('address') is-invalid @enderror" placeholder="Enter address">
+                                        @error('address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">City</label>
-                                        <input type="text" class="form-control" placeholder="Enter city">
+                                        <input type="text" name="city" value="{{ old('city') }}" class="form-control @error('city') is-invalid @enderror" placeholder="Enter city">
+                                        @error('city')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">State</label>
-                                        <input type="text" class="form-control" placeholder="Enter state">
+                                        <input type="text" name="state" value="{{ old('state') }}" class="form-control @error('state') is-invalid @enderror" placeholder="Enter state">
+                                        @error('state')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-3">
                                     <div class="mb-3">
-                                        <label class="form-label">Zip</label>
-                                        <input type="text" class="form-control" placeholder="Enter zip code">
+                                        <label class="form-label">Post Code</label>
+                                        <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control @error('postal_code') is-invalid @enderror" placeholder="Enter postal code">
+                                        @error('postal_code')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                             </div><!-- Row -->
@@ -127,19 +175,28 @@
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label class="form-label">Property Size</label>
-                                        <input type="text" class="form-control" placeholder="Enter property size">
+                                        <input type="text" name="property_size" value="{{ old('property_size') }}" class="form-control @error('property_size') is-invalid @enderror" placeholder="Enter property size">
+                                        @error('property_size')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label class="form-label">Property Video</label>
-                                        <input type="text" class="form-control" placeholder="Enter property video">
+                                        <input type="text" name="property_video" value="{{ old('property_video') }}" class="form-control @error('property_video') is-invalid @enderror" placeholder="Enter property video">
+                                        @error('property_video')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label class="form-label">Neighborhood</label>
-                                        <input type="text" class="form-control" placeholder="Enter neighborhood">
+                                        <input type="text" name="neighborhood" value="{{ old('neighborhood') }}" class="form-control @error('neighborhood') is-invalid @enderror" placeholder="Enter neighborhood">
+                                        @error('neighborhood')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                             </div><!-- Row -->
@@ -147,7 +204,10 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Latitude</label>
-                                        <input type="text" class="form-control" placeholder="Enter latitude">
+                                        <input type="text" name="latitude" value="{{ old('latitude') }}" class="form-control @error('latitude') is-invalid @enderror" placeholder="Enter latitude">
+                                        @error('latitude')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         <a href="https://www.latlong.net/convert-address-to-lat-long.html"
                                             target="_blank">Go here get Latitude from address</a>
                                     </div>
@@ -155,7 +215,10 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Longitude</label>
-                                        <input type="text" class="form-control" placeholder="Enter longitude">
+                                        <input type="text" name="longitude" value="{{ old('longitude') }}" class="form-control @error('latitude') is-invalid @enderror" placeholder="Enter longitude">
+                                        @error('longitude')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         <a href="https://www.latlong.net/convert-address-to-lat-long.html"
                                             target="_blank">Go here get Longitude from address</a>
                                     </div>
@@ -165,34 +228,43 @@
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label class="form-label">Property Type</label>
-                                        <select class="form-select" name="ptype_id" id="exampleFormControlSelect1">
+                                        <select name="ptype_id" class="form-select @error('ptype_id') is-invalid @enderror" id="exampleFormControlSelect1">
                                             <option selected="" disabled="">Select Type</option>
                                             @foreach ($propertyType as $row)
                                                 <option value="{{ $row->id }}">{{ $row->type_name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('ptype_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label class="form-label">Property Amenities</label>
-                                        <select name="amenities_id[]" class="js-example-basic-multiple form-select"
+                                        <select name="amenities_id[]" class="js-example-basic-multiple form-select @error('amenities_id') is-invalid @enderror"
                                             multiple="multiple" data-width="100%">
                                             @foreach ($amenities as $row)
                                                 <option value="{{ $row->id }}">{{ $row->amenity_name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('amenities_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label class="form-label">Agent</label>
-                                        <select class="form-select" name="agent_id" id="exampleFormControlSelect1">
+                                        <select name="agent_id" class="form-select @error('agent_id') is-invalid @enderror" id="exampleFormControlSelect1">
                                             <option selected="" disabled="">Select Agent</option>
                                             @foreach ($activeAgent as $row)
                                                 <option value="{{ $row->id }}">{{ $row->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('agent_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                             </div><!-- Row -->
@@ -200,7 +272,10 @@
                                 <div class="col-sm-12">
                                     <div class="mb-3">
                                         <label class="form-label">Short Description</label>
-                                        <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                        <textarea name="short_description" class="form-control @error('') is-invalid @enderror" id="" rows="3"></textarea>
+                                        @error('short_description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                             </div><!-- Row -->
@@ -208,26 +283,33 @@
                                 <div class="col-sm-12">
                                     <div class="mb-3">
                                         <label class="form-label">Long Description</label>
-                                        <textarea class="form-control" name="tinymce" id="tinymceExample" rows="6"></textarea>
+                                        <textarea name="long_description" class="form-control @error('') is-invalid @enderror" id="tinymceExample" rows="6"></textarea>
+                                        @error('long_description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
                             </div><!-- Row -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Choose</label>
-                                        <div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" name="skill_check" class="form-check-input"
-                                                    id="checkInline1">
-                                                <label class="form-check-label" for="checkInline1">Feature
-                                                    Property</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" name="skill_check" class="form-check-input"
-                                                    id="checkInline2">
-                                                <label class="form-check-label" for="checkInline2">Hot Property</label>
-                                            </div>
+                                        <label class="form-label">Choose:</label>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="checkInline1">Feature
+                                                Property</label>
+                                            <input type="checkbox" name="featured" class="form-check-input"
+                                                id="checkInline1" value="0">
+                                            @error('featured')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="checkInline2">Hot Property</label>
+                                            <input type="checkbox" name="hot" class="form-check-input"
+                                                id="checkInline2" value="1">
+                                            @error('hot')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div><!-- Col -->
@@ -304,7 +386,7 @@
                                    </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary submit">Save</button>
+                            <button type="submit" class="btn btn-primary submit">Save...</button>
                         </form>
                     </div>
                 </div>
