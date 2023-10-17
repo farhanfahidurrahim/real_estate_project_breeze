@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Controller;
+use App\Models\Amenity;
 use App\Models\Property;
+use App\Models\PropertyType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -22,7 +26,10 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('backend.admin.property.create');
+        $propertyType = PropertyType::latest()->get();
+        $amenities = Amenity::latest()->get();
+        $activeAgent = User::where('status','active')->where('role','agent')->latest()->get();
+        return view('backend.admin.property.create', compact('propertyType','amenities','activeAgent'));
     }
 
     /**
