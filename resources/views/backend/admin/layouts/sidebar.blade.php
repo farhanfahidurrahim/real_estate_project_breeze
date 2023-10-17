@@ -22,7 +22,7 @@
             <li class="nav-item">
                 <a href="{{ route('property-type.index') }}" class="nav-link">
                     <i class="link-icon" data-feather="feather"></i>
-                    <span class="link-title">Property Type</span>
+                    <span class="link-title">Pro-Type</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -32,9 +32,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="pages/apps/calendar.html" class="nav-link">
+                <a href="{{ route('property.index') }}" class="nav-link">
                     <i class="link-icon" data-feather="calendar"></i>
-                    <span class="link-title">Calendar</span>
+                    <span class="link-title">Property</span>
                 </a>
             </li>
             <li class="nav-item nav-category">Manage</li>

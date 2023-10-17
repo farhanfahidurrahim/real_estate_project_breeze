@@ -114,8 +114,8 @@ class AdminController extends Controller
 
     public function allAgent()
     {
-        $agents = User::where('role','agent')->orderBy('id','desc')->get();
-        return view('backend.admin.manage_agent.index', compact('agents'));
+        $data = User::where('role','agent')->orderBy('id','desc')->get();
+        return view('backend.admin.manage_agent.index', compact('data'));
     }
 
     public function createAgent()

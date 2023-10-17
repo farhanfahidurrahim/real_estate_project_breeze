@@ -4,7 +4,7 @@
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <a href="{{ route('create.agent') }}" class="btn btn-inverse-info">Add New Agent</a></a>
+                <a href="{{ route('property.create') }}" class="btn btn-inverse-info">Add New Property</a></a>
             </ol>
         </nav>
 
@@ -20,6 +20,9 @@
                                         <th>#</th>
                                         <th>Image</th>
                                         <th>Name</th>
+                                        <th>PType</th>
+                                        <th>Status Type</th>
+                                        <th>City</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>

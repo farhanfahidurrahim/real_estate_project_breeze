@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -12,7 +13,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        //
+        $data = Property::latest()->get();
+        return view('backend.admin.property.index', compact('data'));
     }
 
     /**
@@ -20,7 +22,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.admin.property.create');
     }
 
     /**

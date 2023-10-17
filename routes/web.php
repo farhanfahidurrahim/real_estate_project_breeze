@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\PropertyTypeController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Frontend\UserController;
@@ -58,6 +59,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     //ProperyType Section
     Route::resource('property-type', PropertyTypeController::class);
     Route::resource('amenities', AmenityController::class);
+    Route::resource('property', PropertyController::class);
 });
 
 
