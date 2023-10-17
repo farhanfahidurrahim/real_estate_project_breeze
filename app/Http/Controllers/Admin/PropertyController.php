@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Agent\AgentController;
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Amenity;
 use App\Models\Property;
+use Illuminate\Support\Str;
 use App\Models\PropertyType;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 
 class PropertyController extends Controller
 {
@@ -37,18 +39,17 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request->all();
         $request->validate([
             'ptype_id' => 'required',
             'amenities_id' => 'required',
             'property_name' => 'required',
-            'property_slug' => 'required',
-            'property_code' => 'required',
             'property_status' => 'required',
             'lowest_price' => 'required',
             'maximum_price' => 'required',
             'property_thumbnail' => 'required',
             'short_description' => 'required',
-            'long_description' => 'required',
+            // 'long_description' => 'required',
             'bedrooms' => 'required',
             'bathrooms' => 'required',
             'garage' => 'required',
@@ -62,12 +63,57 @@ class PropertyController extends Controller
             'neighborhood' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
-            'featured' => 'required',
-            'hot' => 'required',
             'agent_id' => 'required',
-            'status' => 'required',
         ]);
-        return $request->all();
+
+        $allamenities = $request->amenities_id;
+        $amenitiesToString = implode(",", $allamenities);
+        // dd($amenities);
+
+        $slug = Str::of($request->property_name)->slug('-');
+
+        $image = $request->file('property_thumbnail');
+        $imagName = $slug.'-'.date('dmY').'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(370,250)->save('upload/images/property/thumbnail/'.$imagName);
+        $save_db = 'upload/images/property/thumbnail/'.$imagName;
+
+        Property::create([
+            'ptype_id' => $request->ptype_id,
+            'amenities_id' => $amenitiesToString,
+            'property_name' => $request->property_name,
+            'property_slug' => $slug,
+            'property_code' => 'PC-'.Str::random(5),
+            'property_status' => $request->property_status,
+            'lowest_price' => $request->lowest_price,
+            'maximum_price' => $request->maximum_price,
+            'property_thumbnail' => $save_db,
+            'short_description' => $request->short_description,
+            'long_description' => $request->long_description,
+            'bedrooms' => $request->bedrooms,
+            'bathrooms' => $request->bathrooms,
+            'garage' => $request->garage,
+            'garage_size' => $request->garage_size,
+            'property_size' => $request->property_size,
+            'property_video' => $request->property_video,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'neighborhood' => $request->neighborhood,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'featured' => $request->featured,
+            'hot' => $request->hot,
+            'agent_id' => $request->agent_id,
+            'status' => 1,
+        ]);
+
+        $notification = array(
+            'message' => "Property Created Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('property.index')->with($notification);
     }
 
     /**
