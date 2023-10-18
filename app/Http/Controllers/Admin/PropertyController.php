@@ -148,7 +148,8 @@ class PropertyController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Property::find($id);
+        return view('backend.admin.property.show', compact('data'));
     }
 
     /**

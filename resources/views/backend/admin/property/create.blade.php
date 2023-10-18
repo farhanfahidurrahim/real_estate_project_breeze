@@ -34,7 +34,7 @@
                                         <select name="property_status" value="{{ old('property_status') }}" class="form-select @error('property_status') is-invalid @enderror" id="exampleFormControlSelect1">
                                             <option selected="" disabled="">Select Status</option>
                                             <option value="rent" {{ old('property_status') == 'rent' ? 'selected' : '' }}>rent</option>
-                                            <option value="18" {{ old('property_status') == '18' ? 'selected' : '' }}>18</option>
+                                            <option value="buy" {{ old('property_status') == 'buy' ? 'selected' : '' }}>buy</option>
                                         </select>
                                         @error('property_status')
                                             <span class="text-danger">{{ $message }}</span>
@@ -98,7 +98,7 @@
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Bedrooms</label>
-                                        <input type="text" name="bedrooms" value="{{ old('bedrooms') }}" class="form-control @error('bedrooms') is-invalid @enderror" placeholder="Enter bedrooms">
+                                        <input type="number" name="bedrooms" value="{{ old('bedrooms') }}" class="form-control @error('bedrooms') is-invalid @enderror" placeholder="Enter bedrooms">
                                         @error('bedrooms')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -107,7 +107,7 @@
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Bathrooms</label>
-                                        <input type="text" name="bathrooms" value="{{ old('bathrooms') }}" class="form-control @error('bathrooms') is-invalid @enderror" placeholder="Enter bathrooms">
+                                        <input type="number" name="bathrooms" value="{{ old('bathrooms') }}" class="form-control @error('bathrooms') is-invalid @enderror" placeholder="Enter bathrooms">
                                         @error('bathrooms')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -116,7 +116,7 @@
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Garage</label>
-                                        <input type="text" name="garage" value="{{ old('garage') }}" class="form-control @error('garage') is-invalid @enderror" placeholder="Enter garage">
+                                        <input type="number" name="garage" value="{{ old('garage') }}" class="form-control @error('garage') is-invalid @enderror" placeholder="Enter garage">
                                         @error('garage')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -164,7 +164,7 @@
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Post Code</label>
-                                        <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control @error('postal_code') is-invalid @enderror" placeholder="Enter postal code">
+                                        <input type="number" name="postal_code" value="{{ old('postal_code') }}" class="form-control @error('postal_code') is-invalid @enderror" placeholder="Enter postal code">
                                         @error('postal_code')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
