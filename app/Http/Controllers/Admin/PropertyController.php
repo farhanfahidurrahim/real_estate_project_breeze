@@ -68,8 +68,8 @@ class PropertyController extends Controller
             'agent_id' => 'required',
         ]);
 
-        $allamenities = $request->amenities_id;
-        $amenitiesToString = implode(",", $allamenities);
+        $amenitiesArray = $request->amenities_id;
+        $amenitiesToString = implode(",", $amenitiesArray);
         // dd($amenities);
 
         $slug = Str::of($request->property_name)->slug('-');
@@ -149,7 +149,13 @@ class PropertyController extends Controller
     public function show(string $id)
     {
         $data = Property::find($id);
-        return view('backend.admin.property.show', compact('data'));
+
+        $amenitiesString = $data->amenities_id;
+        $amenitiesArray = explode(',',$amenitiesString);
+
+        $amenities = Amenity::latest()->get();
+
+        return view('backend.admin.property.show', compact('data','amenities','amenitiesArray'));
     }
 
     /**

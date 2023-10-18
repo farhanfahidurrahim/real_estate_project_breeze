@@ -113,11 +113,12 @@
                                     <tr>
                                         <th>Property Amenities</th>
                                         <td>
-                                            <select name="amenities_id[]" class="js-example-basic-multiple form-select @error('amenities_id') is-invalid @enderror"
+                                            <select name="amenities_id[]" class="js-example-basic-multiple form-select"
                                             multiple="multiple" data-width="100%">
-
-                                                <option value=""></option>
-
+                                                @foreach ($amenities as $row)
+                                                    <option value="{{ $row->id }}" {{ (in_array($row->id, $amenitiesArray)) ? 'selected' : '' }}
+                                                        >{{ $row->amenity_name }}</option>
+                                                @endforeach
                                             </select>
                                         </td>
                                     </tr>
@@ -135,7 +136,7 @@
                                     </tr>
                                     <tr>
                                         <th>Agent</th>
-                                        <td><code>{{ $data->agent_id }}</code></td>
+                                        <td><code>{{ $data->agentName->name }}</code></td>
                                     </tr>
                                 </tbody>
                             </table>
