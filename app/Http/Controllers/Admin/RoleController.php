@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Contracts\Role as ContractsRole;
 
 class RoleController extends Controller
 {
@@ -18,17 +20,11 @@ class RoleController extends Controller
         return view('backend.admin.permission.all_permission', compact('permission'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function addPermission(Request $request)
     {
         return view('backend.admin.permission.add_permission');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function storePermission(Request $request)
     {
         $request->validate([
@@ -46,36 +42,82 @@ class RoleController extends Controller
             'alert-type' => 'success',
         );
 
-        return redirect()->route('permission.all')->with($notification);
+        return redirect()->route('all.permission')->with($notification);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    //< ========================= Role ======================== >
+
+    public function allRole()
     {
-        //
+        $roles = Role::all();
+        return view('backend.admin.role.all_role', compact('roles'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function addRole(Request $request)
     {
-        //
+        return view('backend.admin.role.add_role');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function storeRole(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        Role::create([
+            'name' => $request->name,
+        ]);
+
+        $notification = array(
+            'message' => "Role Created Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.role')->with($notification);
+    }
+
+    public function allRolePermission()
+    {
+        $roles = Role::all();
+
+        return view('backend.admin.role.all_role_permission', compact('roles'));
+    }
+
+    public function addRolePermission()
+    {
+        $roles = Role::all();
+        $permissions = Permission::all();
+
+        $permissionGroupNames = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
+        return view('backend.admin.role.add_role_permission', compact('roles', 'permissions', 'permissionGroupNames'));
+    }
+
+    public function storeRolePermission(Request $request)
+    {
+        $data = array();
+        $permissions = $request->permission;
+
+        foreach($permissions as $item){
+            $data['role_id'] = $request->role_id;
+            $data['permission_id'] = $item;
+
+            DB::table('role_has_permissions')->insert($data);
+        }
+
+        $notification = array(
+            'message' => "Role Permission Created Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

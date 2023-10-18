@@ -4,7 +4,7 @@
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <a href="{{ route('add.permission') }}" class="btn btn-inverse-info">Add Permission</a></a>&nbsp; &nbsp;
+                <a href="{{ route('add.role.permission') }}" class="btn btn-inverse-info">Add Role Permission</a></a>&nbsp; &nbsp;
                 <a href="" class="btn btn-inverse-warning">Import</a></a>&nbsp; &nbsp;
                 <a href="" class="btn btn-inverse-danger">Export</a></a>
             </ol>
@@ -20,17 +20,21 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Role Name</th>
                                         <th>Permission Name</th>
-                                        <th>Group Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($permission as $row)
+                                    @foreach ($roles as $key => $row)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $row->name }}</td>
-                                            <td>{{ $row->group_name }}</td>
+                                            <td>
+                                                @foreach ($row->permissions as $permission)
+                                                    <span class="badge bg-danger">{{ $permission->name }}</span>
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 <a href="" class="btn btn-inverse-warning"><i
                                                         data-feather="edit"></i> </a>

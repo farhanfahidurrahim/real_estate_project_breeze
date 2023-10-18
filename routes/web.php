@@ -61,9 +61,16 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     //Property Section
     Route::resource('property', PropertyController::class);
     //Role & Permisson Section
-    Route::get('all-permission', [RoleController::class, 'allPermission'])->name('permission.all');
-    Route::get('add-permission', [RoleController::class, 'addPermission'])->name('permission.add');
+    Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission');
+    Route::get('add-permission', [RoleController::class, 'addPermission'])->name('add.permission');
     Route::post('store-permission', [RoleController::class, 'storePermission'])->name('store.permission');
+
+    Route::get('all-role', [RoleController::class, 'allRole'])->name('all.role');
+    Route::get('add-role', [RoleController::class, 'addRole'])->name('add.role');
+    Route::post('store-role', [RoleController::class, 'storeRole'])->name('store.role');
+    Route::get('all-role-permission', [RoleController::class, 'allRolePermission'])->name('all.role.permission');
+    Route::get('add-role-permission', [RoleController::class, 'addRolePermission'])->name('add.role.permission');
+    Route::post('store-role-permission', [RoleController::class, 'storeRolePermission'])->name('store.role.permission');
 });
 
 
