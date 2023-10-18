@@ -22,12 +22,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-//___Frontend Route___
+//___Frontend/User Route___
 Route::get('/', [UserController::class, 'index']);
 Route::get('/sign-in', [UserController::class, 'signIn'])->name('signin');
 
 Route::get('/dashboard', function (){ return view('dashboard'); })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::group(['prefix'=>'user', 'middleware' => 'auth'], function(){
     Route::get('profile-edit', [UserController::class, 'editUserProfile'])->name('user.profile.edit');
     Route::post('profile-update', [UserController::class, 'updateUserProfile'])->name('user.profile.update');
@@ -41,7 +40,6 @@ require __DIR__.'/auth.php';
 
 //___Admin Route___
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
-
 Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], function(){
     Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
@@ -55,10 +53,11 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     Route::post('store-agent', [AdminController::class, 'storeAgent'])->name('store.agent');
     Route::get('destroy-agent/{id}', [AdminController::class, 'destroyAgent'])->name('destroy.agent');
     Route::get('change-agent-status', [AdminController::class, 'statusChangeAgent']);
-
     //ProperyType Section
     Route::resource('property-type', PropertyTypeController::class);
+    //ProperyAmenities Section
     Route::resource('amenities', AmenityController::class);
+    //Property Section
     Route::resource('property', PropertyController::class);
 });
 
@@ -66,7 +65,6 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
 //___Agent Route___
 Route::get('/agent/login', [AgentController::class, 'agentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'agentRegister'])->name('agent.register');
-
 Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role:agent']], function(){
     Route::get('dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
     Route::get('logout', [AgentController::class, 'agentLogout'])->name('agent.logout');
