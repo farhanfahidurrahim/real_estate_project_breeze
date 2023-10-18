@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\PropertyTypeController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\ProfileController;
@@ -59,6 +60,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     Route::resource('amenities', AmenityController::class);
     //Property Section
     Route::resource('property', PropertyController::class);
+    //Role & Permisson Section
+    Route::get('all-permission', [RoleController::class, 'allPermission'])->name('permission.all');
+    Route::get('add-permission', [RoleController::class, 'addPermission'])->name('permission.add');
+    Route::post('store-permission', [RoleController::class, 'storePermission'])->name('store.permission');
 });
 
 
