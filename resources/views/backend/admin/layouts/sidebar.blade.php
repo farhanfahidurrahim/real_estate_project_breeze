@@ -183,6 +183,24 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#errorPages" role="button"
                     aria-expanded="false" aria-controls="errorPages">
                     <i class="link-icon" data-feather="cloud-off"></i>
+                    <span class="link-title">Admin</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="errorPages">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('all.admin') }}" class="nav-link">All Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('add.admin') }}" class="nav-link">Add Admin</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#errorPages" role="button"
+                    aria-expanded="false" aria-controls="errorPages">
+                    <i class="link-icon" data-feather="cloud-off"></i>
                     <span class="link-title">Error</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>

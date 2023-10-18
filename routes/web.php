@@ -48,12 +48,18 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     Route::post('profile-update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
     Route::get('password-change', [AdminController::class, 'adminPasswordChange'])->name('admin.password.change');
     Route::post('password-update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
-    //Manage Agent Section
+
+    //Manage Admin & Agent Section
+    Route::get('all-admin', [AdminController::class, 'allAdmin'])->name('all.admin');
+    Route::get('add-admin', [AdminController::class, 'addAdmin'])->name('add.admin');
+    Route::post('store-admin', [AdminController::class, 'storeAdmin'])->name('store.admin');
+
     Route::get('all-agent', [AdminController::class, 'allAgent'])->name('all.agent');
     Route::get('create-agent', [AdminController::class, 'createAgent'])->name('create.agent');
     Route::post('store-agent', [AdminController::class, 'storeAgent'])->name('store.agent');
     Route::get('destroy-agent/{id}', [AdminController::class, 'destroyAgent'])->name('destroy.agent');
     Route::get('change-agent-status', [AdminController::class, 'statusChangeAgent']);
+
     //ProperyType Section
     Route::resource('property-type', PropertyTypeController::class);
     //ProperyAmenities Section
@@ -68,6 +74,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     Route::get('all-role', [RoleController::class, 'allRole'])->name('all.role');
     Route::get('add-role', [RoleController::class, 'addRole'])->name('add.role');
     Route::post('store-role', [RoleController::class, 'storeRole'])->name('store.role');
+
     Route::get('all-role-permission', [RoleController::class, 'allRolePermission'])->name('all.role.permission');
     Route::get('add-role-permission', [RoleController::class, 'addRolePermission'])->name('add.role.permission');
     Route::post('store-role-permission', [RoleController::class, 'storeRolePermission'])->name('store.role.permission');

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -108,6 +109,54 @@ class AdminController extends Controller
         );
 
         return back()->with($notification);
+    }
+
+    //---------------Manage Admin-------------
+
+    public function allAdmin()
+    {
+        $data = User::where('role','admin')->get();
+        return view('backend.admin.manage_admin.index', compact('data'));
+    }
+
+    public function addAdmin()
+    {
+        $roles = Role::all();
+        return view('backend.admin.manage_admin.create', compact('roles'));
+    }
+
+    public function storeAdmin(Request $request)
+    {
+        // return $request->all();
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone' => 'required',
+            'address' => 'required',
+            'roles' => 'required',
+        ]);
+
+        $data = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'role' => 'admin',
+            'status' => 'active',
+        ]);
+
+        if ($request->roles) {
+            $data->assignRole($request->roles);
+        }
+
+        $notification = array(
+            'message' => "New Admin Created!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.admin')->with($notification);
     }
 
     //---------------get Agent in Admin-------------
