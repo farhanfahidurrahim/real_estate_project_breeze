@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use App\Models\PropertyType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Facility;
+use App\Models\MultiImage;
 use Intervention\Image\Facades\Image;
 
 class PropertyController extends Controller
@@ -75,9 +77,8 @@ class PropertyController extends Controller
         $image = $request->file('property_thumbnail');
         $imagName = $slug.'-'.date('dmY').'.'.$image->getClientOriginalExtension();
         Image::make($image)->resize(370,250)->save('upload/images/property/thumbnail/'.$imagName);
-        $save_db = 'upload/images/property/thumbnail/'.$imagName;
 
-        Property::create([
+        $propertyInsert = Property::create([
             'ptype_id' => $request->ptype_id,
             'amenities_id' => $amenitiesToString,
             'property_name' => $request->property_name,
@@ -86,7 +87,7 @@ class PropertyController extends Controller
             'property_status' => $request->property_status,
             'lowest_price' => $request->lowest_price,
             'maximum_price' => $request->maximum_price,
-            'property_thumbnail' => $save_db,
+            'property_thumbnail' => $imagName,
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
             'bedrooms' => $request->bedrooms,
@@ -107,6 +108,32 @@ class PropertyController extends Controller
             'agent_id' => $request->agent_id,
             'status' => 1,
         ]);
+
+        //Multiple Image Upload
+        $image = $request->file('multi_img');
+        foreach ($image as $img) {
+            $imageName = Str::random(5).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(770,520)->save('upload/images/property/multiple/'.$imageName);
+            $storeImg = $imageName;
+
+            MultiImage::create([
+                'property_id' => $propertyInsert->id,
+                'photo_name' => $storeImg,
+            ]);
+        }
+
+        //Faciltities Add / Add More
+        $facilities = Count($request->facility_name);
+
+        if ($facilities != NULL) {
+            for ($i=0; $i < $facilities; $i++) {
+                $data = new Facility();
+                $data->property_id = $propertyInsert->id;
+                $data->facility_name = $request->facility_name[$i];
+                $data->distance = $request->distance[$i];
+                $data->save();
+            }
+        }
 
         $notification = array(
             'message' => "Property Created Succesfully!",

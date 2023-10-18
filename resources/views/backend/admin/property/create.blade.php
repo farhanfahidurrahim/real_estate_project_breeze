@@ -33,7 +33,7 @@
                                         <label class="form-label">Property Status</label>
                                         <select name="property_status" value="{{ old('property_status') }}" class="form-select @error('property_status') is-invalid @enderror" id="exampleFormControlSelect1">
                                             <option selected="" disabled="">Select Status</option>
-                                            <option value="12" {{ old('property_status') == '12' ? 'selected' : '' }}>12</option>
+                                            <option value="rent" {{ old('property_status') == 'rent' ? 'selected' : '' }}>rent</option>
                                             <option value="18" {{ old('property_status') == '18' ? 'selected' : '' }}>18</option>
                                         </select>
                                         @error('property_status')
@@ -321,7 +321,7 @@
                                         <div class="mb-3">
                                             <label for="facility_name" class="form-label">Facilities </label>
                                             <select name="facility_name[]" id="facility_name" class="form-control">
-                                                <option value="">Select Facility</option>
+                                                <option selected disabled>Select Facility</option>
                                                 <option value="Hospital">Hospital</option>
                                                 <option value="SuperMarket">Super Market</option>
                                                 <option value="School">School</option>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('multi_images', function (Blueprint $table) {
             $table->id();
-            $table->integer('property_id');
+            $table->string('property_id');
             $table->string('photo_name');
             $table->timestamps();
         });

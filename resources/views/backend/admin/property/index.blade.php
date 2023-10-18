@@ -21,8 +21,9 @@
                                         <th>Image</th>
                                         <th>Name</th>
                                         <th>PType</th>
-                                        <th>Status Type</th>
+                                        <th>PStatus</th>
                                         <th>City</th>
+                                        <th>Code</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -32,24 +33,22 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img
-                                                    src="{{ !empty($row->photo) ? url('upload/images/agent/' . $row->photo) : url('upload/images/no_image.jpg') }}">
+                                                <img src="{{ !empty($row->property_thumbnail) ? url('upload/images/property/thumbnail/'.$row->property_thumbnail) : url('upload/images/no_image.jpg') }}">
                                             </td>
-                                            <td>{{ $row->name }}</td>
+                                            <td>{{ $row->property_name }}</td>
+                                            <td>{{ $row->type->type_name }}</td>
+                                            <td>{{ $row->property_status }}</td>
+                                            <td>{{ $row->city }}</td>
+                                            <td>{{ $row->property_code }}</td>
                                             <td>
-                                                <input data-id="{{ $row->id }}" class="toggleClass" type="checkbox"
-                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                    data-on="Active" data-off="Inactive"
-                                                    {{ $row->status ? 'checked' : '' }}>
+                                                <input data-id="{{ $row->id }}" class="toggleClass" type="checkbox" data-onstyle="success"
+                                                    data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $row->status ? 'checked' : '' }}>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-inverse-info"><i data-feather="eye"></i>
-                                                </a>
-                                                <a href="" class="btn btn-inverse-warning"><i
-                                                        data-feather="edit"></i> </a>
-                                                <a href="{{ route('destroy.agent', $row->id) }}"
-                                                    class="btn btn-inverse-danger" id="delete" title="Delete"><i
-                                                        data-feather="trash-2"></i> </a>
+                                                <a href="{{ route('property.show',$row->id) }}" class="btn btn-inverse-info" title="View"><i data-feather="eye"></i></a>
+                                                <a href="" class="btn btn-inverse-warning"><i data-feather="edit"></i> </a>
+                                                <a href="" class="btn btn-inverse-danger"
+                                                    id="delete" title="Delete"><i data-feather="trash-2"></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach
