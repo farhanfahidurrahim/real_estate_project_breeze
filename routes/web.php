@@ -43,7 +43,7 @@ require __DIR__.'/auth.php';
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
 Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], function(){
-    Route::get('dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
     Route::get('profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
     Route::post('profile-update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
