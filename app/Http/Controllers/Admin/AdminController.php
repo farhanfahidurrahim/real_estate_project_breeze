@@ -159,6 +159,63 @@ class AdminController extends Controller
         return redirect()->route('all.admin')->with($notification);
     }
 
+    public function editAdmin($id)
+    {
+        $data = User::findOrFail($id);
+        $roles = Role::all();
+
+        return view('backend.admin.manage_admin.edit', compact('data','roles'));
+    }
+
+    public function updateAdmin(Request $request, $id)
+    {
+        $data = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'roles' => 'required',
+        ]);
+
+        $data->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'role' => 'admin',
+            'status' => 'active',
+        ]);
+
+        $data->roles()->detach();
+        if ($request->roles) {
+            $data->assignRole($request->roles);
+        }
+
+        $notification = array(
+            'message' => "Admin Updated!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.admin')->with($notification);
+    }
+
+    public function deleteAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        if (!is_null($user)) {
+            $user->delete();
+        }
+
+        $notification = array(
+            'message' => "Admin Deleted!",
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
     //---------------get Agent in Admin-------------
 
     public function allAgent()

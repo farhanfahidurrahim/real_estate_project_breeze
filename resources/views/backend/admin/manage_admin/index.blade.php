@@ -37,19 +37,21 @@
                                             <td>{{ $row->name }}</td>
                                             <td>{{ $row->email }}</td>
                                             <td>{{ $row->phone }}</td>
-                                            <td>{{ $row->role }}</td>
                                             <td>
+                                                @foreach ($row->roles as $role)
+                                                    <span class="badge badge-pill bg-danger">{{ $role->name }}</span>
+                                                @endforeach
+                                            </td>
+                                            {{-- <td>
                                                 <input data-id="{{ $row->id }}" class="toggleClass" type="checkbox"
                                                     data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                                     data-on="Active" data-off="Inactive"
                                                     {{ $row->status ? 'checked' : '' }}>
-                                            </td>
+                                            </td> --}}
                                             <td>
-                                                <a href="" class="btn btn-inverse-info"><i data-feather="eye"></i>
-                                                </a>
-                                                <a href="" class="btn btn-inverse-warning"><i
+                                                <a href="{{ route('edit.admin',$row->id) }}" class="btn btn-inverse-warning"><i
                                                         data-feather="edit"></i> </a>
-                                                <a href="{{ route('destroy.agent', $row->id) }}"
+                                                <a href="{{ route('delete.admin', $row->id) }}"
                                                     class="btn btn-inverse-danger" id="delete" title="Delete"><i
                                                         data-feather="trash-2"></i> </a>
                                             </td>

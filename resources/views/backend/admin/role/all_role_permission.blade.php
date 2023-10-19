@@ -36,7 +36,7 @@
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-inverse-warning"><i
+                                                <a href="{{ route('edit.role.permission',$row->id) }}" class="btn btn-inverse-warning"><i
                                                         data-feather="edit"></i> </a>
                                                 <a href="{{ route('destroy.agent', $row->id) }}"
                                                     class="btn btn-inverse-danger" id="delete" title="Delete"><i

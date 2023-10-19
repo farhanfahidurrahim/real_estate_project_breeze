@@ -88,8 +88,8 @@ class RoleController extends Controller
     {
         $roles = Role::all();
         $permissions = Permission::all();
-
         $permissionGroupNames = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
+
         return view('backend.admin.role.add_role_permission', compact('roles', 'permissions', 'permissionGroupNames'));
     }
 
@@ -110,7 +110,16 @@ class RoleController extends Controller
             'alert-type' => 'success',
         );
 
-        return redirect()->back()->with($notification);
+        return redirect()->route('all.role.permission')->with($notification);
+    }
+
+    public function editRolePermission($id)
+    {
+        $roles = Role::findOrFail($id);
+        $permissions = Permission::all();
+        $permissionGroupNames = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
+
+        return view('backend.admin.role.edit_role_permission', compact('roles', 'permissions', 'permissionGroupNames'));
     }
 
     public function update(Request $request, string $id)

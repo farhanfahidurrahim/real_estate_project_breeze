@@ -11,6 +11,7 @@
     </div>
     <div class="sidebar-body">
         <ul class="nav">
+
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link">
@@ -18,14 +19,35 @@
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
+
             <li class="nav-item nav-category">Manage</li>
+            @if (Auth::user()->can('agent.menu'))
             <li class="nav-item">
-                <a href="{{ route('all.agent') }}" target="" class="nav-link">
-                    <i class="link-icon" data-feather="hash"></i>
-                    <span class="link-title">All Agent</span>
+                <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button"
+                    aria-expanded="false" aria-controls="general-pages">
+                    <i class="link-icon" data-feather="book"></i>
+                    <span class="link-title">Agent</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
+                <div class="collapse" id="general-pages">
+                    <ul class="nav sub-menu">
+                        @if (Auth::user()->can('agent.all'))
+                        <li class="nav-item">
+                            <a href="{{ route('all.agent') }}" class="nav-link">All Permission</a>
+                        </li>
+                        @endif
+                        @if (Auth::user()->can('agent.add'))
+                        <li class="nav-item">
+                            <a href="{{ route('create.agent') }}" class="nav-link">Add Permission</a>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
             </li>
+            @endif
+
             <li class="nav-item nav-category">Realstate</li>
+            @if (Auth::user()->can('type.menu'))
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false"
                     aria-controls="uiComponents">
@@ -35,15 +57,22 @@
                 </a>
                 <div class="collapse" id="uiComponents">
                     <ul class="nav sub-menu">
+                        @if (Auth::user()->can('type.all'))
                         <li class="nav-item">
                             <a href="{{ route('property-type.index') }}" class="nav-link">All Type</a>
                         </li>
+                        @endif
+                        @if (Auth::user()->can('type.add'))
                         <li class="nav-item">
                             <a href="{{ route('property-type.create') }}" class="nav-link">Add Type</a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </li>
+            @endif
+
+            @if (Auth::user()->can('amenities.menu'))
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button"
                     aria-expanded="false" aria-controls="advancedUI">
@@ -53,14 +82,22 @@
                 </a>
                 <div class="collapse" id="advancedUI">
                     <ul class="nav sub-menu">
+                        @if (Auth::user()->can('amenities.all'))
                         <li class="nav-item">
                             <a href="{{ route('amenities.index') }}" class="nav-link">All Amenity</a>
                         </li>
+                        @endif
+                        @if (Auth::user()->can('amenities.add'))
                         <li class="nav-item">
                             <a href="{{ route('amenities.create') }}" class="nav-link">Add Amenity</a>
                         </li>
+                        @endif
+                    </ul>
                 </div>
             </li>
+            @endif
+
+            @if (Auth::user()->can('property.menu'))
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#forms" role="button" aria-expanded="false"
                     aria-controls="forms">
@@ -70,15 +107,20 @@
                 </a>
                 <div class="collapse" id="forms">
                     <ul class="nav sub-menu">
+                        @if (Auth::user()->can('property.all'))
                         <li class="nav-item">
                             <a href="{{ route('property.index') }}" class="nav-link">All Property</a>
                         </li>
+                        @endif
+                        @if (Auth::user()->can('property.add'))
                         <li class="nav-item">
                             <a href="{{ route('property.create') }}" class="nav-link">Add Property</a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#charts" role="button" aria-expanded="false"
                     aria-controls="charts">
@@ -136,6 +178,7 @@
                     </ul>
                 </div>
             </li>
+
             <li class="nav-item nav-category">Roll & Permission</li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button"

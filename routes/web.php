@@ -41,7 +41,7 @@ require __DIR__.'/auth.php';
 
 //___Admin Route___
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
-Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], function(){
+Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], function(){
     Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
     Route::get('profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
@@ -49,12 +49,8 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     Route::get('password-change', [AdminController::class, 'adminPasswordChange'])->name('admin.password.change');
     Route::post('password-update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
 
-    //Manage Admin & Agent Section
-    Route::get('all-admin', [AdminController::class, 'allAdmin'])->name('all.admin');
-    Route::get('add-admin', [AdminController::class, 'addAdmin'])->name('add.admin');
-    Route::post('store-admin', [AdminController::class, 'storeAdmin'])->name('store.admin');
-
-    Route::get('all-agent', [AdminController::class, 'allAgent'])->name('all.agent');
+    //Manage Agent Section
+    Route::get('all-agent', [AdminController::class, 'allAgent'])->name('all.agent')->middleware('permission:all.agent');
     Route::get('create-agent', [AdminController::class, 'createAgent'])->name('create.agent');
     Route::post('store-agent', [AdminController::class, 'storeAgent'])->name('store.agent');
     Route::get('destroy-agent/{id}', [AdminController::class, 'destroyAgent'])->name('destroy.agent');
@@ -78,13 +74,22 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role:admin']], functi
     Route::get('all-role-permission', [RoleController::class, 'allRolePermission'])->name('all.role.permission');
     Route::get('add-role-permission', [RoleController::class, 'addRolePermission'])->name('add.role.permission');
     Route::post('store-role-permission', [RoleController::class, 'storeRolePermission'])->name('store.role.permission');
+    Route::get('edit-role-permission/{id}', [RoleController::class, 'editRolePermission'])->name('edit.role.permission');
+
+    //Manage Admin with Role
+    Route::get('all-admin', [AdminController::class, 'allAdmin'])->name('all.admin');
+    Route::get('add-admin', [AdminController::class, 'addAdmin'])->name('add.admin');
+    Route::post('store-admin', [AdminController::class, 'storeAdmin'])->name('store.admin');
+    Route::get('edit-admin/{id}', [AdminController::class, 'editAdmin'])->name('edit.admin');
+    Route::post('update-admin/{id}', [AdminController::class, 'updateAdmin'])->name('update.admin');
+    Route::get('delete-admin/{id}', [AdminController::class, 'deleteAdmin'])->name('delete.admin');
 });
 
 
 //___Agent Route___
 Route::get('/agent/login', [AgentController::class, 'agentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'agentRegister'])->name('agent.register');
-Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role:agent']], function(){
+Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role_aux:agent']], function(){
     Route::get('dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
     Route::get('logout', [AgentController::class, 'agentLogout'])->name('agent.logout');
     Route::get('profile', [AgentController::class, 'agentProfile'])->name('agent.profile');
