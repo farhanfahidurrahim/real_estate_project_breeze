@@ -38,7 +38,7 @@
                                             <td>
                                                 <a href="{{ route('edit.role.permission',$row->id) }}" class="btn btn-inverse-warning"><i
                                                         data-feather="edit"></i> </a>
-                                                <a href="{{ route('destroy.agent', $row->id) }}"
+                                                <a href="{{ route('delete.role.permission', $row->id) }}"
                                                     class="btn btn-inverse-danger" id="delete" title="Delete"><i
                                                         data-feather="trash-2"></i> </a>
                                             </td>

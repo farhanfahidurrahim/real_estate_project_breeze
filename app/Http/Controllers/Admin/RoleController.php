@@ -17,12 +17,12 @@ class RoleController extends Controller
     public function allPermission()
     {
         $permission = Permission::all();
-        return view('backend.admin.permission.all_permission', compact('permission'));
+        return view('backend.admin.permission_role.all_permission', compact('permission'));
     }
 
     public function addPermission(Request $request)
     {
-        return view('backend.admin.permission.add_permission');
+        return view('backend.admin.permission_role.add_permission');
     }
 
     public function storePermission(Request $request)
@@ -50,13 +50,13 @@ class RoleController extends Controller
     public function allRole()
     {
         $roles = Role::all();
-        return view('backend.admin.role.all_role', compact('roles'));
+        return view('backend.admin.permission_role.all_role', compact('roles'));
     }
 
 
     public function addRole(Request $request)
     {
-        return view('backend.admin.role.add_role');
+        return view('backend.admin.permission_role.add_role');
     }
 
     public function storeRole(Request $request)
@@ -77,11 +77,23 @@ class RoleController extends Controller
         return redirect()->route('all.role')->with($notification);
     }
 
+    public function deleteRole($id)
+    {
+        Role::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => "Role Deleted Succesfully!",
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
     public function allRolePermission()
     {
         $roles = Role::all();
 
-        return view('backend.admin.role.all_role_permission', compact('roles'));
+        return view('backend.admin.permission_role.all_role_permission', compact('roles'));
     }
 
     public function addRolePermission()
@@ -90,7 +102,7 @@ class RoleController extends Controller
         $permissions = Permission::all();
         $permissionGroupNames = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
 
-        return view('backend.admin.role.add_role_permission', compact('roles', 'permissions', 'permissionGroupNames'));
+        return view('backend.admin.permission_role.add_role_permission', compact('roles', 'permissions', 'permissionGroupNames'));
     }
 
     public function storeRolePermission(Request $request)
@@ -119,16 +131,38 @@ class RoleController extends Controller
         $permissions = Permission::all();
         $permissionGroupNames = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
 
-        return view('backend.admin.role.edit_role_permission', compact('roles', 'permissions', 'permissionGroupNames'));
+        return view('backend.admin.permission_role.edit_role_permission', compact('roles', 'permissions', 'permissionGroupNames'));
     }
 
-    public function update(Request $request, string $id)
+    public function updateRolePermission(Request $request, string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $permissions = $request->permission;
+
+        if (!empty($permissions)) {
+           $role->syncPermissions($permissions);
+        }
+
+        $notification = array(
+            'message' => "Role Permission Updated Succesfully!",
+            'alert-type' => 'error',
+        );
+
+        return redirect()->route('all.role.permission')->with($notification);
     }
 
-    public function destroy(string $id)
+    public function deleteRolePermission($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        if (!is_null($role)) {
+            $role->delete();
+        }
+
+        $notification = array(
+            'message' => "Role Permission Deleted Succesfully!",
+            'alert-type' => 'error',
+        );
+
+        return redirect()->back()->with($notification);
     }
 }

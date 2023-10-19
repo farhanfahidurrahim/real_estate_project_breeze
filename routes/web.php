@@ -80,11 +80,14 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('all-role', [RoleController::class, 'allRole'])->name('all.role');
     Route::get('add-role', [RoleController::class, 'addRole'])->name('add.role');
     Route::post('store-role', [RoleController::class, 'storeRole'])->name('store.role');
+    Route::get('delete-role/{id}', [RoleController::class, 'deleteRole'])->name('delete.role');
 
     Route::get('all-role-permission', [RoleController::class, 'allRolePermission'])->name('all.role.permission');
     Route::get('add-role-permission', [RoleController::class, 'addRolePermission'])->name('add.role.permission');
     Route::post('store-role-permission', [RoleController::class, 'storeRolePermission'])->name('store.role.permission');
     Route::get('edit-role-permission/{id}', [RoleController::class, 'editRolePermission'])->name('edit.role.permission');
+    Route::post('update-role-permission/{id}', [RoleController::class, 'updateRolePermission'])->name('update.role.permission');
+    Route::get('delete-role-permission/{id}', [RoleController::class, 'deleteRolePermission'])->name('delete.role.permission');
 
     //Manage Admin with Role
     Route::get('all-admin', [AdminController::class, 'allAdmin'])->name('all.admin');

@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('store.role.permission') }}" class="forms-sample">
+                        <form method="POST" action="{{ route('update.role.permission',$roles->id) }}" class="forms-sample">
                             @csrf
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Role</label>
@@ -33,25 +33,26 @@
                             @foreach ($permissionGroupNames as $group)
                                 <div class="row">
                                     <div class="col-3">
+                                        @php
+                                            $permissionNames = DB::table('permissions')
+                                                ->select('name', 'id')
+                                                ->where('group_name', $group->group_name)
+                                                ->get();
+                                        @endphp
                                         <div class="form-check mb-3">
-                                            <input name="" type="checkbox" class="form-check-input"
-                                                id="exampleCheck1">
+                                            <input type="checkbox" class="form-check-input"
+                                            id="checkDefault" {{ App\Models\User::roleHasPermissions($roles,$permissionNames) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="exampleCheck1">
                                                 {{ $group->group_name }}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-3">
-                                        @php
-                                            $permissionName = DB::table('permissions')
-                                                ->select('name', 'id')
-                                                ->where('group_name', $group->group_name)
-                                                ->get();
-                                        @endphp
-                                        @foreach ($permissionName as $row)
+
+                                        @foreach ($permissionNames as $row)
                                             <div class="form-check mb-3">
                                                 <input name="permission[]" id="checkDefault{{ $row->id }}"
-                                                    value="{{ $row->id }}" type="checkbox" class="form-check-input">
+                                                    value="{{ $row->id }}" {{ $roles->hasPermissionTo($row->name) ? 'checked' : '' }} type="checkbox" class="form-check-input">
                                                 <label class="form-check-label" for="checkDefault{{ $row->id }}">
                                                     {{ $row->name }}
                                                 </label>
@@ -60,7 +61,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <button type="submit" class="btn btn-primary me-2">Save</button>
+                            <button type="submit" class="btn btn-primary me-2">Save Change</button>
                         </form>
                     </div>
                 </div>
