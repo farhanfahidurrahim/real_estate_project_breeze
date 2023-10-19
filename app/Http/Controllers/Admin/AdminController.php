@@ -161,10 +161,10 @@ class AdminController extends Controller
 
     public function editAdmin($id)
     {
-        $data = User::findOrFail($id);
+        $user = User::findOrFail($id);
         $roles = Role::all();
 
-        return view('backend.admin.manage_admin.edit', compact('data','roles'));
+        return view('backend.admin.manage_admin.edit', compact('user','roles'));
     }
 
     public function updateAdmin(Request $request, $id)

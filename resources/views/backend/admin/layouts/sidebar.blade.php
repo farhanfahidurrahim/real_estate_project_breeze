@@ -121,7 +121,7 @@
                 </div>
             </li>
             @endif
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#charts" role="button" aria-expanded="false"
                     aria-controls="charts">
                     <i class="link-icon" data-feather="pie-chart"></i>
@@ -177,7 +177,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
 
             <li class="nav-item nav-category">Roll & Permission</li>
             <li class="nav-item">

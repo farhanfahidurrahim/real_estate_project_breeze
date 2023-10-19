@@ -14,11 +14,11 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('update.admin',$data->id) }}" class="forms-sample">
+                        <form method="POST" action="{{ route('update.admin',$user->id) }}" class="forms-sample">
                             @csrf
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Admin Name</label>
-                                <input type="text" name="name" value="{{ $data->name }}" class="form-control @error('name') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
+                                <input type="text" name="name" value="{{ old('name', $user->name) }}" class="form-control @error('name') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
                                     placeholder="Name">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
@@ -26,14 +26,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Admin Email</label>
-                                <input type="email" name="email" value="{{ $data->email }}" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1" placeholder="Email">
+                                <input type="email" name="email" value="{{ old('email', $user->email) }}" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1" placeholder="Email">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Admin Phone</label>
-                                <input type="text" name="phone" value="{{ $data->phone }}" class="form-control @error('phone') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
+                                <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" class="form-control @error('phone') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
                                     placeholder="Phone">
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Admin Address</label>
-                                <input type="text" name="address" value="{{ $data->address }}" class="form-control @error('address') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
+                                <input type="text" name="address" value="{{ old('address', $user->address) }}" class="form-control @error('address') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
                                     placeholder="Address">
                                 @error('address')
                                     <span class="text-danger">{{ $message }}</span>
@@ -52,8 +52,8 @@
                                 <select name="roles" class="form-select @error('roles') is-invalid @enderror">
                                     <option selected disabled>Select Role</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                    @endforeach
+                                        <option value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                        @endforeach
                                 </select>
                                 @error('roles')
                                     <span class="text-danger">{{ $message }}</span>
@@ -73,7 +73,7 @@
                                     placeholder="Retype Password">
                             </div> --}}
                             <button type="submit" class="btn btn-primary me-2">Save Changes</button>
-                            <a href="{{ route('all.agent') }}" class="btn btn-secondary">All Agent</a>
+                            <a href="{{ route('all.admin') }}" class="btn btn-secondary">All Admin</a>
                         </form>
 
                     </div>

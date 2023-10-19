@@ -89,6 +89,8 @@ class RoleController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    //< ========================= Role Permission ======================== >
+
     public function allRolePermission()
     {
         $roles = Role::all();
