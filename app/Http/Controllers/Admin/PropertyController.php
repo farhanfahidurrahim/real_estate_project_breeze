@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Amenity;
 use App\Models\Property;
 use Illuminate\Support\Str;
-use App\Models\PropertyType;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Facility;
@@ -30,7 +30,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        $propertyType = PropertyType::latest()->get();
+        $propertyType = Type::latest()->get();
         $amenities = Amenity::latest()->get();
         $activeAgent = User::where('status','active')->where('role','agent')->latest()->get();
         return view('backend.admin.property.create', compact('propertyType','amenities','activeAgent'));

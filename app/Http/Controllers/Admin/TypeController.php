@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\PropertyType;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
-class PropertyTypeController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $ptypes = PropertyType::latest()->get();
+        $ptypes = Type::latest()->get();
         return view('backend.admin.property_type.index', compact('ptypes'));
     }
 
@@ -31,11 +31,11 @@ class PropertyTypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type_name' => 'required|unique:property_types|max:100',
+            'type_name' => 'required|unique:types|max:100',
             'type_icon' => 'required',
         ]);
 
-        PropertyType::create($request->all());
+        Type::create($request->all());
 
         $notification = array(
             'message' => "Password Change!",

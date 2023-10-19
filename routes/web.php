@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\PropertyController;
-use App\Http\Controllers\Admin\PropertyTypeController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Frontend\UserController;
@@ -41,7 +41,9 @@ require __DIR__.'/auth.php';
 
 //___Admin Route___
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
+
 Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], function(){
+
     Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
     Route::get('profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
@@ -50,14 +52,16 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::post('password-update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
 
     //Manage Agent Section
-    Route::get('all-agent', [AdminController::class, 'allAgent'])->name('all.agent')->middleware('permission:all.agent');
-    Route::get('create-agent', [AdminController::class, 'createAgent'])->name('create.agent');
-    Route::post('store-agent', [AdminController::class, 'storeAgent'])->name('store.agent');
-    Route::get('destroy-agent/{id}', [AdminController::class, 'destroyAgent'])->name('destroy.agent');
+    Route::get('all-agent', [AdminController::class, 'allAgent'])->name('all.agent')->middleware('permission:agent.all');
+    Route::get('create-agent', [AdminController::class, 'createAgent'])->name('create.agent')->middleware('permission:agent.add');
+    Route::post('store-agent', [AdminController::class, 'storeAgent'])->name('store.agent')->middleware('permission:store.agent');
+    Route::get('destroy-agent/{id}', [AdminController::class, 'destroyAgent'])->name('destroy.agent')->middleware('permission:delete.agent');
     Route::get('change-agent-status', [AdminController::class, 'statusChangeAgent']);
 
-    //ProperyType Section
-    Route::resource('property-type', PropertyTypeController::class);
+    //PropertyType Section
+    Route::get('type', [TypeController::class, 'index'])->name('property-type.index');
+    Route::get('type/create', [TypeController::class, 'create'])->name('property-type.create');
+    Route::post('type/store', [TypeController::class, 'store'])->name('property-type.store');
     //ProperyAmenities Section
     Route::resource('amenities', AmenityController::class);
     //Property Section
@@ -89,7 +93,9 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
 //___Agent Route___
 Route::get('/agent/login', [AgentController::class, 'agentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'agentRegister'])->name('agent.register');
+
 Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role_aux:agent']], function(){
+
     Route::get('dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
     Route::get('logout', [AgentController::class, 'agentLogout'])->name('agent.logout');
     Route::get('profile', [AgentController::class, 'agentProfile'])->name('agent.profile');

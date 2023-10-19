@@ -12,7 +12,7 @@ class Property extends Model
 
     public function type()
     {
-        return $this->belongsTo(PropertyType::class,'ptype_id','id');
+        return $this->belongsTo(Type::class,'ptype_id','id');
     }
 
     public function agentName()

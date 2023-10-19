@@ -33,12 +33,12 @@
                     <ul class="nav sub-menu">
                         @if (Auth::user()->can('agent.all'))
                         <li class="nav-item">
-                            <a href="{{ route('all.agent') }}" class="nav-link">All Permission</a>
+                            <a href="{{ route('all.agent') }}" class="nav-link">All Agent</a>
                         </li>
                         @endif
                         @if (Auth::user()->can('agent.add'))
                         <li class="nav-item">
-                            <a href="{{ route('create.agent') }}" class="nav-link">Add Permission</a>
+                            <a href="{{ route('create.agent') }}" class="nav-link">Add Agent</a>
                         </li>
                         @endif
                     </ul>
