@@ -29,7 +29,7 @@
                                 <select name="group_name" class="form-select">
                                     <option selected disabled>Select Group</option>
                                     <option value="type">Property Type</option>
-                                    <option value="amenities">Amenities</option>
+                                    <option value="amenity">Amenity</option>
                                     <option value="property">Property</option>
                                     <option value="agent">Manage Agent</option>
                                     <option value="role">Role & Permission</option>

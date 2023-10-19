@@ -41,7 +41,7 @@ class AmenityController extends Controller
             'alert-type' => 'success',
         );
 
-        return redirect()->route('amenities.index')->with($notification);
+        return redirect()->route('amenity.index')->with($notification);
     }
 
     /**

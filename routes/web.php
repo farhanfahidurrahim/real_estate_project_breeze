@@ -54,18 +54,24 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     //Manage Agent Section
     Route::get('all-agent', [AdminController::class, 'allAgent'])->name('all.agent')->middleware('permission:agent.all');
     Route::get('create-agent', [AdminController::class, 'createAgent'])->name('create.agent')->middleware('permission:agent.add');
-    Route::post('store-agent', [AdminController::class, 'storeAgent'])->name('store.agent')->middleware('permission:store.agent');
-    Route::get('destroy-agent/{id}', [AdminController::class, 'destroyAgent'])->name('destroy.agent')->middleware('permission:delete.agent');
+    Route::post('store-agent', [AdminController::class, 'storeAgent'])->name('store.agent')->middleware('permission:agent.store');
+    Route::get('destroy-agent/{id}', [AdminController::class, 'destroyAgent'])->name('destroy.agent')->middleware('permission:agent.delete');
     Route::get('change-agent-status', [AdminController::class, 'statusChangeAgent']);
 
-    //PropertyType Section
-    Route::get('type', [TypeController::class, 'index'])->name('property-type.index');
-    Route::get('type/create', [TypeController::class, 'create'])->name('property-type.create');
-    Route::post('type/store', [TypeController::class, 'store'])->name('property-type.store');
-    //ProperyAmenities Section
-    Route::resource('amenities', AmenityController::class);
+    //Property-Type Section
+    Route::get('type', [TypeController::class, 'index'])->name('type.index')->middleware('permission:type.all');
+    Route::get('type/create', [TypeController::class, 'create'])->name('type.create')->middleware('permission:type.all');
+    Route::post('type/store', [TypeController::class, 'store'])->name('type.store')->middleware('permission:type.all');
+    //Propery-Amenities Section
+    Route::get('amenity', [AmenityController::class, 'index'])->name('amenity.index')->middleware('permission:amenity.all');
+    Route::get('amenity/create', [AmenityController::class, 'create'])->name('amenity.create')->middleware('permission:amenity.all');
+    Route::post('amenity/store', [AmenityController::class, 'store'])->name('amenity.store')->middleware('permission:amenity.all');
     //Property Section
-    Route::resource('property', PropertyController::class);
+    Route::get('property', [PropertyController::class, 'index'])->name('property.index')->middleware('permission:property.all');
+    Route::get('property/create', [PropertyController::class, 'create'])->name('property.create')->middleware('permission:property.all');
+    Route::post('property/store', [PropertyController::class, 'store'])->name('property.store')->middleware('permission:property.all');
+    Route::get('property/show/{id}', [PropertyController::class, 'show'])->name('property.show')->middleware('permission:property.all');
+
     //Role & Permisson Section
     Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission');
     Route::get('add-permission', [RoleController::class, 'addPermission'])->name('add.permission');

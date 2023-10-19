@@ -59,12 +59,12 @@
                     <ul class="nav sub-menu">
                         @if (Auth::user()->can('type.all'))
                         <li class="nav-item">
-                            <a href="{{ route('property-type.index') }}" class="nav-link">All Type</a>
+                            <a href="{{ route('type.index') }}" class="nav-link">All Type</a>
                         </li>
                         @endif
                         @if (Auth::user()->can('type.add'))
                         <li class="nav-item">
-                            <a href="{{ route('property-type.create') }}" class="nav-link">Add Type</a>
+                            <a href="{{ route('type.create') }}" class="nav-link">Add Type</a>
                         </li>
                         @endif
                     </ul>
@@ -72,7 +72,7 @@
             </li>
             @endif
 
-            @if (Auth::user()->can('amenities.menu'))
+            @if (Auth::user()->can('amenity.menu'))
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button"
                     aria-expanded="false" aria-controls="advancedUI">
@@ -82,14 +82,14 @@
                 </a>
                 <div class="collapse" id="advancedUI">
                     <ul class="nav sub-menu">
-                        @if (Auth::user()->can('amenities.all'))
+                        @if (Auth::user()->can('amenity.all'))
                         <li class="nav-item">
-                            <a href="{{ route('amenities.index') }}" class="nav-link">All Amenity</a>
+                            <a href="{{ route('amenity.index') }}" class="nav-link">All Amenity</a>
                         </li>
                         @endif
-                        @if (Auth::user()->can('amenities.add'))
+                        @if (Auth::user()->can('amenity.add'))
                         <li class="nav-item">
-                            <a href="{{ route('amenities.create') }}" class="nav-link">Add Amenity</a>
+                            <a href="{{ route('amenity.create') }}" class="nav-link">Add Amenity</a>
                         </li>
                         @endif
                     </ul>

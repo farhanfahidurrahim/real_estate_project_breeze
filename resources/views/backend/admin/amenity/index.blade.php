@@ -4,7 +4,7 @@
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <a href="{{ route('amenities.create') }}" class="btn btn-inverse-info">Add New Amenity</a></a>
+                <a href="{{ route('amenity.create') }}" class="btn btn-inverse-info">Add New Amenity</a></a>
             </ol>
         </nav>
 

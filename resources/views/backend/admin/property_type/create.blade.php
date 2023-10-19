@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('property-type.store') }}" class="forms-sample">
+                        <form method="POST" action="{{ route('type.store') }}" class="forms-sample">
                             @csrf
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Type Name</label>

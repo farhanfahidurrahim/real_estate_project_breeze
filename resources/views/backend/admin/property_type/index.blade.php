@@ -4,7 +4,7 @@
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <a href="{{ route('property-type.create') }}" class="btn btn-inverse-info">Add New Property Type</a></a>
+                <a href="{{ route('type.create') }}" class="btn btn-inverse-info">Add New Property Type</a></a>
             </ol>
         </nav>
 

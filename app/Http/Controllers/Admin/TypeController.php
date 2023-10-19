@@ -42,7 +42,7 @@ class TypeController extends Controller
             'alert-type' => 'success',
         );
 
-        return redirect()->route('property-type.index')->with($notification);
+        return redirect()->route('type.index')->with($notification);
     }
 
     /**
