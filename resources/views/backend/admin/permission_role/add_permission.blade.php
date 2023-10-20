@@ -17,14 +17,6 @@
                         <form method="POST" action="{{ route('store.permission') }}" class="forms-sample">
                             @csrf
                             <div class="mb-3">
-                                <label for="exampleInputUsername1" class="form-label">Permission Name</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
-                                    placeholder="Name">
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Group Name</label>
                                 <select name="group_name" class="form-select">
                                     <option selected disabled>Select Group</option>
@@ -32,9 +24,18 @@
                                     <option value="amenity">Amenity</option>
                                     <option value="property">Property</option>
                                     <option value="agent">Manage Agent</option>
+                                    <option value="admin">Manage Admin</option>
                                     <option value="role">Role & Permission</option>
                                 </select>
                                 @error('group_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputUsername1" class="form-label">Permission Name</label>
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
+                                    placeholder="Name">
+                                @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

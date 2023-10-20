@@ -179,6 +179,7 @@
                 </div>
             </li> --}}
 
+            @if (Auth::user()->can('role_permission.menu'))
             <li class="nav-item nav-category">Roll & Permission</li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button"
@@ -240,6 +241,8 @@
                     </ul>
                 </div>
             </li>
+            @endif
+
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#errorPages" role="button"
                     aria-expanded="false" aria-controls="errorPages">

@@ -18,7 +18,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Admin Name</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
+                                <input type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
                                     placeholder="Name">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
@@ -26,14 +26,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Admin Email</label>
-                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1" placeholder="Email">
+                                <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1" placeholder="Email">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Admin Phone</label>
-                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
+                                <input type="text" name="phone" value="{{ old('phone') }}" class="form-control @error('phone') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
                                     placeholder="Phone">
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Admin Address</label>
-                                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
+                                <input type="text" name="address" value="{{ old('address') }}" class="form-control @error('address') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
                                     placeholder="Address">
                                 @error('address')
                                     <span class="text-danger">{{ $message }}</span>
@@ -73,7 +73,7 @@
                                     placeholder="Retype Password">
                             </div>
                             <button type="submit" class="btn btn-primary me-2">Save</button>
-                            <a href="{{ route('all.agent') }}" class="btn btn-secondary">All Agent</a>
+                            <a href="{{ route('all.admin') }}" class="btn btn-secondary">All Admin</a>
                         </form>
 
                     </div>

@@ -73,29 +73,29 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('property/show/{id}', [PropertyController::class, 'show'])->name('property.show')->middleware('permission:property.all');
 
     //Role & Permisson Section
-    Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission');
-    Route::get('add-permission', [RoleController::class, 'addPermission'])->name('add.permission');
-    Route::post('store-permission', [RoleController::class, 'storePermission'])->name('store.permission');
+    Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission')->middleware('permission:role_permission.menu');
+    Route::get('add-permission', [RoleController::class, 'addPermission'])->name('add.permission')->middleware('permission:role_permission.menu');
+    Route::post('store-permission', [RoleController::class, 'storePermission'])->name('store.permission')->middleware('permission:role_permission.menu');
 
-    Route::get('all-role', [RoleController::class, 'allRole'])->name('all.role');
-    Route::get('add-role', [RoleController::class, 'addRole'])->name('add.role');
-    Route::post('store-role', [RoleController::class, 'storeRole'])->name('store.role');
-    Route::get('delete-role/{id}', [RoleController::class, 'deleteRole'])->name('delete.role');
+    Route::get('all-role', [RoleController::class, 'allRole'])->name('all.role')->middleware('permission:role_permission.menu');
+    Route::get('add-role', [RoleController::class, 'addRole'])->name('add.role')->middleware('permission:role_permission.menu');
+    Route::post('store-role', [RoleController::class, 'storeRole'])->name('store.role')->middleware('permission:role_permission.menu');
+    Route::get('delete-role/{id}', [RoleController::class, 'deleteRole'])->name('delete.role')->middleware('permission:role_permission.menu');
 
-    Route::get('all-role-permission', [RoleController::class, 'allRolePermission'])->name('all.role.permission');
-    Route::get('add-role-permission', [RoleController::class, 'addRolePermission'])->name('add.role.permission');
-    Route::post('store-role-permission', [RoleController::class, 'storeRolePermission'])->name('store.role.permission');
-    Route::get('edit-role-permission/{id}', [RoleController::class, 'editRolePermission'])->name('edit.role.permission');
-    Route::post('update-role-permission/{id}', [RoleController::class, 'updateRolePermission'])->name('update.role.permission');
-    Route::get('delete-role-permission/{id}', [RoleController::class, 'deleteRolePermission'])->name('delete.role.permission');
+    Route::get('all-role-permission', [RoleController::class, 'allRolePermission'])->name('all.role.permission')->middleware('permission:role_permission.menu');
+    Route::get('add-role-permission', [RoleController::class, 'addRolePermission'])->name('add.role.permission')->middleware('permission:role_permission.menu');
+    Route::post('store-role-permission', [RoleController::class, 'storeRolePermission'])->name('store.role.permission')->middleware('permission:role_permission.menu');
+    Route::get('edit-role-permission/{id}', [RoleController::class, 'editRolePermission'])->name('edit.role.permission')->middleware('permission:role_permission.menu');
+    Route::post('update-role-permission/{id}', [RoleController::class, 'updateRolePermission'])->name('update.role.permission')->middleware('permission:role_permission.menu');
+    Route::get('delete-role-permission/{id}', [RoleController::class, 'deleteRolePermission'])->name('delete.role.permission')->middleware('permission:role_permission.menu');
 
     //Manage Admin with Role
-    Route::get('all-admin', [AdminController::class, 'allAdmin'])->name('all.admin');
-    Route::get('add-admin', [AdminController::class, 'addAdmin'])->name('add.admin');
-    Route::post('store-admin', [AdminController::class, 'storeAdmin'])->name('store.admin');
-    Route::get('edit-admin/{id}', [AdminController::class, 'editAdmin'])->name('edit.admin');
-    Route::post('update-admin/{id}', [AdminController::class, 'updateAdmin'])->name('update.admin');
-    Route::get('delete-admin/{id}', [AdminController::class, 'deleteAdmin'])->name('delete.admin');
+    Route::get('all-admin', [AdminController::class, 'allAdmin'])->name('all.admin')->middleware('permission:role_permission.menu');
+    Route::get('add-admin', [AdminController::class, 'addAdmin'])->name('add.admin')->middleware('permission:role_permission.menu');
+    Route::post('store-admin', [AdminController::class, 'storeAdmin'])->name('store.admin')->middleware('permission:role_permission.menu');
+    Route::get('edit-admin/{id}', [AdminController::class, 'editAdmin'])->name('edit.admin')->middleware('permission:role_permission.menu');
+    Route::post('update-admin/{id}', [AdminController::class, 'updateAdmin'])->name('update.admin')->middleware('permission:role_permission.menu');
+    Route::get('delete-admin/{id}', [AdminController::class, 'deleteAdmin'])->name('delete.admin')->middleware('permission:role_permission.menu');
 });
 
 
