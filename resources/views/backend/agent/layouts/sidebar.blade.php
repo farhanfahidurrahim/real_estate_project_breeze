@@ -39,13 +39,13 @@
                                 <a href="{{ route('agent.property.index') }}" class="nav-link">All Property </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/email/read.html" class="nav-link">Add Property</a>
+                                <a href="{{ route('agent.property.create') }}" class="nav-link">Add Property</a>
                             </li>
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('buy.package') }}" class="nav-link">
+                    <a href="{{ route('agent.buy.package') }}" class="nav-link">
                         <i class="link-icon" data-feather="message-square"></i>
                         <span class="link-title">Buy Package</span>
                     </a>

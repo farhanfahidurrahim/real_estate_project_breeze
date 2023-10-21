@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('package_name')->nullable();
+            $table->string('package_invoice')->nullable();
             $table->string('package_credit')->nullable();
             $table->string('package_amount')->nullable();
             $table->timestamps();

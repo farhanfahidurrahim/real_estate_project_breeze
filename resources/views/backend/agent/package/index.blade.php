@@ -2,12 +2,6 @@
 @section('agent')
     <div class="page-content">
 
-        <nav class="page-breadcrumb">
-            <ol class="breadcrumb">
-                <a href="" class="btn btn-inverse-info">Add Property</a>
-            </ol>
-        </nav>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -66,7 +60,7 @@
                                                 </tr>
                                             </table>
                                             <div class="d-grid">
-                                                <button class="btn btn-success mt-4">Start free trial</button>
+                                                <a href="{{ route('agent.buy.business.plan') }}" class="btn btn-success mt-4">Start Now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +87,6 @@
                                                         <p>Invoicing</p>
                                                     </td>
                                                 </tr>
->
                                             </table>
                                             <div class="d-grid">
                                                 <button class="btn btn-primary mt-4">Start free trial</button>

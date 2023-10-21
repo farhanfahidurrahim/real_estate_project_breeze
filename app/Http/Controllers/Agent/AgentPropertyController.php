@@ -34,7 +34,16 @@ class AgentPropertyController extends Controller
     {
         $types = Type::latest()->get();
         $amenities = Amenity::latest()->get();
-        return view('backend.agent.property.create', compact('types', 'amenities'));
+
+        $id = Auth::user()->id;
+        $creditFind = User::where('role','agent')->where('id',$id)->first();
+        $creditValue = $creditFind->credit;
+        // dd($creditValue);
+        if ($creditValue == 1 || $creditValue == 7) {
+            return redirect()->route('agent.buy.package');
+        } else{
+            return view('backend.agent.property.create', compact('types', 'amenities'));
+        }
     }
 
     /**

@@ -120,5 +120,7 @@ Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role_aux:agent']], fu
     Route::get('property/create', [AgentPropertyController::class, 'create'])->name('agent.property.create');
     Route::post('property/store', [AgentPropertyController::class, 'store'])->name('agent.property.store');
     //Package Section
-    Route::get('package', [BuyPackageController::class, 'index'])->name('buy.package');
+    Route::get('package', [BuyPackageController::class, 'index'])->name('agent.buy.package');
+    Route::get('business/plan', [BuyPackageController::class, 'businessPlan'])->name('agent.buy.business.plan');
+    Route::post('business/plan/store', [BuyPackageController::class, 'businessPlanStore'])->name('agent.buy.business.plan.store');
 });

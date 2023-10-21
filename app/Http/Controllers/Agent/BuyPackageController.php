@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Agent;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\PackagePlan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class BuyPackageController extends Controller
 {
@@ -15,20 +20,37 @@ class BuyPackageController extends Controller
         return view('backend.agent.package.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function businessPlan()
     {
-        //
+        $id = Auth::user()->id;
+        $data = User::find($id);
+        return view('backend.agent.package.business_plan', compact('data'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function businessPlanStore(Request $request)
     {
-        //
+        $id = Auth::user()->id;
+        $creditFind = User::findOrFail($id);
+        $creditValue = $creditFind->credit;
+
+        PackagePlan::create([
+            'user_id' => $id,
+            'package_name' => 'Business',
+            'package_invoice' => 'BP-'.Str::random(5),
+            'package_credit' => '3',
+            'package_amount' => '20',
+        ]);
+
+        User::where('id',$id)->update([
+            'credit' => DB::raw('3 + '.$creditValue),
+        ]);
+
+        $notification = array(
+            'message' => "Basic Package Purchase!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('agent.property.index')->with($notification);
     }
 
     /**
