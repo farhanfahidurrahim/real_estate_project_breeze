@@ -109,6 +109,11 @@ class RoleController extends Controller
 
     public function storeRolePermission(Request $request)
     {
+        $request->validate([
+            'role_id' => 'required',
+            'permission' => 'required',
+        ]);
+
         $data = array();
         $permissions = $request->permission;
 

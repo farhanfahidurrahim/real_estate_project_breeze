@@ -23,13 +23,13 @@
             <li class="nav-item nav-category">Manage</li>
             @if (Auth::user()->can('agent.menu'))
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button"
-                    aria-expanded="false" aria-controls="general-pages">
-                    <i class="link-icon" data-feather="book"></i>
+                <a class="nav-link" data-bs-toggle="collapse" href="#charts" role="button"
+                    aria-expanded="false" aria-controls="charts">
+                    <i class="link-icon" data-feather="pie-chart"></i>
                     <span class="link-title">Agent</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
-                <div class="collapse" id="general-pages">
+                <div class="collapse" id="charts">
                     <ul class="nav sub-menu">
                         @if (Auth::user()->can('agent.all'))
                         <li class="nav-item">
@@ -121,35 +121,18 @@
                 </div>
             </li>
             @endif
-            {{-- <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#charts" role="button" aria-expanded="false"
-                    aria-controls="charts">
-                    <i class="link-icon" data-feather="pie-chart"></i>
-                    <span class="link-title">Package History</span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
-                </a>
-                <div class="collapse" id="charts">
-                    <ul class="nav sub-menu">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">All</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Add</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
+
+            {{--<li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button" aria-expanded="false"
                     aria-controls="tables">
                     <i class="link-icon" data-feather="layout"></i>
-                    <span class="link-title">Property Message</span>
+                    <span class="link-title">Buy Package</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="tables">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/tables/basic-table.html" class="nav-link">All</a>
+                            <a href="" class="nav-link">All</a>
                         </li>
                         <li class="nav-item">
                             <a href="pages/tables/data-table.html" class="nav-link">Add</a>
@@ -157,7 +140,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#icons" role="button" aria-expanded="false"
                     aria-controls="icons">
                     <i class="link-icon" data-feather="smile"></i>
@@ -243,27 +226,9 @@
             </li>
             @endif
 
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#errorPages" role="button"
-                    aria-expanded="false" aria-controls="errorPages">
-                    <i class="link-icon" data-feather="cloud-off"></i>
-                    <span class="link-title">Error</span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
-                </a>
-                <div class="collapse" id="errorPages">
-                    <ul class="nav sub-menu">
-                        <li class="nav-item">
-                            <a href="pages/error/404.html" class="nav-link">404</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/error/500.html" class="nav-link">500</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
             <li class="nav-item nav-category">Docs</li>
             <li class="nav-item">
-                <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="nav-link">
+                <a href="" target="_blank" class="nav-link">
                     <i class="link-icon" data-feather="hash"></i>
                     <span class="link-title">Documentation</span>
                 </a>

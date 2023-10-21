@@ -17,7 +17,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- Multipe Select Input Tags form css  -->
+    <!--======================== Start Template Asset =============== -->
+    <!-- MultiSelect InputTag -->
 	<link rel="stylesheet" href="{{ asset('backend/assets/vendors/select2/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('backend/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css') }}">
     <!-- dataTable css -->
@@ -32,8 +33,9 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/demo2/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.png') }}" />
+    <!--======================== End Template Asset =============== -->
 
-    <!-- ----------------------------- Custom --------------------------- -->
+    <!-- ---------------------------- Custom --------------------- -->
     <!-- Toastr css -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
     <!-- Bootstrap-toggle switch button css -->
@@ -63,7 +65,7 @@
         </div>
     </div>
 
-
+    <!--======================== Start Template JS =============== -->
     <!-- core:js -->
     <script src="{{ asset('backend/assets/vendors/core/core.js') }}"></script>
     <!-- Plugin js for this page -->
@@ -74,14 +76,10 @@
     <script src="{{ asset('backend/assets/js/template.js') }}"></script>
     <!-- Custom js for this page -->
     <script src="{{ asset('backend/assets/js/dashboard-dark.js') }}"></script>
-
-    <!-- ----------------------------- Custom Js--------------------------- -->
     <!-- dataTables js for this page -->
     <script src="{{ asset('backend/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js') }}"></script>
     <script src="{{ asset('backend/assets/js/data-table.js') }}"></script>
-    <!-- Bootstrap-toggle switch button -->
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <!-- Multipe Select Input Tags form -->
     <script src="{{ asset('backend/assets/vendors/inputmask/jquery.inputmask.min.js') }}"></script>
 	<script src="{{ asset('backend/assets/vendors/select2/select2.min.js') }}"></script>
@@ -91,10 +89,12 @@
 	<script src="{{ asset('backend/assets/js/select2.js') }}"></script>
 	<script src="{{ asset('backend/assets/js/typeahead.js') }}"></script>
 	<script src="{{ asset('backend/assets/js/tags-input.js') }}"></script>
-    <!-- Description Box -->
-    <script src="{{ asset('backend/assets/vendors/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/tinymce.js') }}"></script>
 
+    <!--======================== End Template JS ================= -->
+
+    <!-- ------------------------- Custom Js --------------------- -->
+    <!-- Bootstrap-toggle switch button -->
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <!-- Toastr js -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>

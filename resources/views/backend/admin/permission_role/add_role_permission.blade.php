@@ -24,7 +24,7 @@
                                         <option value="{{ $row->id }}">{{ $row->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('group_name')
+                                @error('role_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -32,7 +32,11 @@
                                 <input type="checkbox" class="form-check-input" id="checkDefaultMain">
                                 <label class="form-check-label" for="checkDefaultMain">Permission All</label>
                             </div>
-
+                            <div>
+                                @error('permission')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                             <hr>
 
                             @foreach ($permissionGroupNames as $group)
@@ -44,7 +48,7 @@
                                             <label class="form-check-label" for="exampleCheck1">
                                                 {{ $group->group_name }}
                                             </label>
-                                        </div>
+                                    </div>
                                     </div>
                                     <div class="col-3">
                                         @php

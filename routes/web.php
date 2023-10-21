@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Agent\AgentController;
+use App\Http\Controllers\Agent\AgentPropertyController;
+use App\Http\Controllers\Agent\BuyPackageController;
+use App\Http\Controllers\Agent\PackageController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -23,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-//___Frontend/User Route___
+//_____Frontend/User Route_________
 Route::get('/', [UserController::class, 'index']);
 Route::get('/sign-in', [UserController::class, 'signIn'])->name('signin');
 
@@ -39,7 +42,7 @@ Route::group(['prefix'=>'user', 'middleware' => 'auth'], function(){
 
 require __DIR__.'/auth.php';
 
-//___Admin Route___
+//_____Admin Route___________________________
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
 Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], function(){
@@ -99,7 +102,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
 });
 
 
-//___Agent Route___
+//_____Agent Route___________________________
 Route::get('/agent/login', [AgentController::class, 'agentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 Route::post('/agent/register', [AgentController::class, 'agentRegister'])->name('agent.register');
 
@@ -111,4 +114,11 @@ Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role_aux:agent']], fu
     Route::post('profile-update', [AgentController::class, 'agentProfileUpdate'])->name('agent.profile.update');
     Route::get('password-change', [AgentController::class, 'agentPasswordChange'])->name('agent.password.change');
     Route::post('password-update', [AgentController::class, 'agentPasswordUpdate'])->name('agent.password.update');
+
+    //Property Section
+    Route::get('property', [AgentPropertyController::class, 'index'])->name('agent.property.index');
+    Route::get('property/create', [AgentPropertyController::class, 'create'])->name('agent.property.create');
+    Route::post('property/store', [AgentPropertyController::class, 'store'])->name('agent.property.store');
+    //Package Section
+    Route::get('package', [BuyPackageController::class, 'index'])->name('buy.package');
 });
