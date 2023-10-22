@@ -123,4 +123,5 @@ Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role_aux:agent']], fu
     Route::get('package', [BuyPackageController::class, 'index'])->name('agent.buy.package');
     Route::get('business/plan', [BuyPackageController::class, 'businessPlan'])->name('agent.buy.business.plan');
     Route::post('business/plan/store', [BuyPackageController::class, 'businessPlanStore'])->name('agent.buy.business.plan.store');
+    Route::get('package/history', [BuyPackageController::class, 'packageHistory'])->name('agent.package.history');
 });

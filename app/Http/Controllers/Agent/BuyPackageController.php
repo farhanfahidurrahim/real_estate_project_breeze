@@ -56,9 +56,10 @@ class BuyPackageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function packageHistory()
     {
-        //
+        $data = PackagePlan::latest()->get();
+        return view('backend.agent.package.package_history', compact('data'));
     }
 
     /**
