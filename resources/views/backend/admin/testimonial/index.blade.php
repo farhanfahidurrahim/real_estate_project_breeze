@@ -29,12 +29,16 @@
                                     @foreach ($data as $row)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $row->type_name }}</td>
-                                            <td>{{ $row->type_icon }}</td>
+                                            <td>
+                                                <img src="{{ !empty($row->image) ? url('upload/images/testimonial/'.$row->image) : url('upload/images/no_image.jpg') }}" style="height: 40px; width:70px;">
+                                            </td>
+                                            <td>{{ $row->name }}</td>
+                                            <td>{{ $row->position }}</td>
+                                            <td>{{ $row->message }}</td>
                                             <td>
                                                 <a href="" class="btn btn-inverse-warning"><i
                                                         data-feather="edit"></i> </a>
-                                                <a href="{{ route('destroy.agent', $row->id) }}"
+                                                <a href=""
                                                     class="btn btn-inverse-danger" id="delete" title="Delete"><i
                                                         data-feather="trash-2"></i> </a>
                                             </td>
