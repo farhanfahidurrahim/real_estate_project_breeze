@@ -134,7 +134,7 @@
                   <span class="link-title">Calendar</span>
                 </a>
               </li> --}}
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#icons" role="button" aria-expanded="false"
                     aria-controls="icons">
                     <i class="link-icon" data-feather="smile"></i>
@@ -144,17 +144,14 @@
                 <div class="collapse" id="icons">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/icons/feather-icons.html" class="nav-link">Feather Icons</a>
+                            <a href="{{ route('testimonial.index') }}" class="nav-link">All Testimonial Message</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/icons/flag-icons.html" class="nav-link">Flag Icons</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/icons/mdi-icons.html" class="nav-link">Mdi Icons</a>
+                            <a href="pages/icons/flag-icons.html" class="nav-link">Add Testimonial Message</a>
                         </li>
                     </ul>
                 </div>
-            </li> --}}
+            </li>
 
             @if (Auth::user()->can('role_permission.menu'))
             <li class="nav-item nav-category">Roll & Permission</li>

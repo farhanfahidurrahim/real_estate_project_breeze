@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class BuyPackageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('backend.agent.package.index');
@@ -54,9 +51,6 @@ class BuyPackageController extends Controller
         return redirect()->route('agent.property.index')->with($notification);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function packageHistory()
     {
         $id = Auth::user()->id;
@@ -64,9 +58,6 @@ class BuyPackageController extends Controller
         return view('backend.agent.package.package_history', compact('data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function packageInvoiceDownload($id)
     {
         $packageHistory = PackagePlan::where('id',$id)->first();
@@ -79,18 +70,12 @@ class BuyPackageController extends Controller
         return $pdf->download('invoice.pdf');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function adminPackageHistory()
     {
         $data = PackagePlan::latest()->get();
         return view('backend.admin.package.package_history', compact('data'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function adminPackageInvoiceDownload($id)
     {
         $packageHistory = PackagePlan::where('id',$id)->first();

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Agent\BuyPackageController;
@@ -77,6 +78,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     //Package History Section
     Route::get('package/history', [BuyPackageController::class, 'adminPackageHistory'])->name('package.history');
     Route::get('package/package/downlaod/{id}', [BuyPackageController::class, 'adminPackageInvoiceDownload'])->name('package.invoice.downlaod');
+    //Testimonial Section
+    Route::get('testimonial', [TestimonialController::class, 'index'])->name('testimonial.index');
+    Route::get('testimonial/create', [TestimonialController::class, 'create'])->name('testimonial.create');
+    Route::post('testimonial/store', [TestimonialController::class, 'store'])->name('testimonial.store');
 
     //Role & Permisson Section
     Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission')->middleware('permission:role_permission.menu');
