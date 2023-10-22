@@ -38,7 +38,7 @@
                                             <td>{{ $row->package_amount }}</td>
                                             <td>{{ $row->created_at->format('l d M Y') }}</td>
                                             <td>
-                                                <a href="" class="btn btn-inverse-warning" title="Download"><i data-feather="download"></i> </a>
+                                                <a href="{{ route('agent.package.invoice.downlaod',$row->id) }}" class="btn btn-inverse-warning" title="Download"><i data-feather="download"></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach

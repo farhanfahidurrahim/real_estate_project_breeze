@@ -124,4 +124,5 @@ Route::group(['prefix'=>'agent', 'middleware' => ['auth', 'role_aux:agent']], fu
     Route::get('business/plan', [BuyPackageController::class, 'businessPlan'])->name('agent.buy.business.plan');
     Route::post('business/plan/store', [BuyPackageController::class, 'businessPlanStore'])->name('agent.buy.business.plan.store');
     Route::get('package/history', [BuyPackageController::class, 'packageHistory'])->name('agent.package.history');
+    Route::get('package/invoice/download/{id}', [BuyPackageController::class, 'packageInvoiceDownload'])->name('agent.package.invoice.downlaod');
 });

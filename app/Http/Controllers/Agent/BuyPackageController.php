@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\PackagePlan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -58,16 +59,24 @@ class BuyPackageController extends Controller
      */
     public function packageHistory()
     {
-        $data = PackagePlan::latest()->get();
+        $id = Auth::user()->id;
+        $data = PackagePlan::where('user_id',$id)->get();
         return view('backend.agent.package.package_history', compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function packageInvoiceDownload($id)
     {
-        //
+        $packageHistory = PackagePlan::where('id',$id)->first();
+
+        $pdf = Pdf::loadView('backend.agent.package.package_history_invoice_pdf', compact('packageHistory'))
+                ->setPaper('a4')->setOption([
+                    'tempDir' => public_path(),
+                    'chroot' => public_path(),
+                ]);
+        return $pdf->download('invoice.pdf');
     }
 
     /**
