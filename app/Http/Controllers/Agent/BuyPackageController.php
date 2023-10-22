@@ -82,16 +82,24 @@ class BuyPackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function adminPackageHistory()
     {
-        //
+        $data = PackagePlan::latest()->get();
+        return view('backend.admin.package.package_history', compact('data'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function adminPackageInvoiceDownload($id)
     {
-        //
+        $packageHistory = PackagePlan::where('id',$id)->first();
+
+        $pdf = Pdf::loadView('backend.agent.package.package_history_invoice_pdf', compact('packageHistory'))
+                ->setPaper('a4')->setOption([
+                    'tempDir' => public_path(),
+                    'chroot' => public_path(),
+                ]);
+        return $pdf->download('invoice.pdf');
     }
 }

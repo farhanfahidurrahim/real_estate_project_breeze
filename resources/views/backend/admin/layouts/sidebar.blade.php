@@ -122,25 +122,19 @@
             </li>
             @endif
 
-            {{--<li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button" aria-expanded="false"
-                    aria-controls="tables">
+            <li class="nav-item">
+                <a href="{{ route('package.history') }}" class="nav-link" >
                     <i class="link-icon" data-feather="layout"></i>
-                    <span class="link-title">Buy Package</span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
+                    <span class="link-title">Package History</span>
                 </a>
-                <div class="collapse" id="tables">
-                    <ul class="nav sub-menu">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">All</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/tables/data-table.html" class="nav-link">Add</a>
-                        </li>
-                    </ul>
-                </div>
             </li>
-              <li class="nav-item">
+            {{-- <li class="nav-item">
+                <a href="pages/apps/calendar.html" class="nav-link">
+                  <i class="link-icon" data-feather="calendar"></i>
+                  <span class="link-title">Calendar</span>
+                </a>
+              </li> --}}
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#icons" role="button" aria-expanded="false"
                     aria-controls="icons">
                     <i class="link-icon" data-feather="smile"></i>

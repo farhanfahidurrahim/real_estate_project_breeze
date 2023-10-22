@@ -74,6 +74,9 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('property/create', [PropertyController::class, 'create'])->name('property.create')->middleware('permission:property.all');
     Route::post('property/store', [PropertyController::class, 'store'])->name('property.store')->middleware('permission:property.all');
     Route::get('property/show/{id}', [PropertyController::class, 'show'])->name('property.show')->middleware('permission:property.all');
+    //Package History Section
+    Route::get('package/history', [BuyPackageController::class, 'adminPackageHistory'])->name('package.history');
+    Route::get('package/package/downlaod/{id}', [BuyPackageController::class, 'adminPackageInvoiceDownload'])->name('package.invoice.downlaod');
 
     //Role & Permisson Section
     Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission')->middleware('permission:role_permission.menu');
