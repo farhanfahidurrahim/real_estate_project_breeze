@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\RoleController;
@@ -82,6 +83,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('testimonial', [TestimonialController::class, 'index'])->name('testimonial.index');
     Route::get('testimonial/create', [TestimonialController::class, 'create'])->name('testimonial.create');
     Route::post('testimonial/store', [TestimonialController::class, 'store'])->name('testimonial.store');
+    //Blog Category Section
+    Route::get('blog/category', [BlogController::class, 'indexBlogCategory'])->name('blog.category.index');
+    Route::get('blog/category/create', [BlogController::class, 'createBlogCategory'])->name('blog.category.create');
+    Route::post('blog/category/store', [BlogController::class, 'storeBlogCategory'])->name('blog.category.store');
 
     //Role & Permisson Section
     Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission')->middleware('permission:role_permission.menu');

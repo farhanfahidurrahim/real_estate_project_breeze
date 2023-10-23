@@ -35,7 +35,7 @@
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Message</label>
                                 <textarea type="text" name="message" class="form-control @error('message') is-invalid @enderror" id="exampleInputUsername1" autocomplete="off"
-                                    placeholder="Message"></textarea>
+                                    placeholder="Message" rows="4"></textarea>
                                 @error('message')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
