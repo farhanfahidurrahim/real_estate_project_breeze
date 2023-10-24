@@ -167,9 +167,9 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a href="pages/apps/chat.html" class="nav-link">
+                <a href="{{ route('setting.smtp') }}" class="nav-link">
                     <i class="link-icon" data-feather="message-square"></i>
-                    <span class="link-title">Chat</span>
+                    <span class="link-title">Setting : Smtp</span>
                 </a>
             </li>
             <li class="nav-item">

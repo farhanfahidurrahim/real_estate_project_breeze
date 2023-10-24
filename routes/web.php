@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Agent\AgentPropertyController;
@@ -91,6 +92,9 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('blog/post', [BlogController::class, 'indexBlogPost'])->name('blog.post.index');
     Route::get('blog/post/create', [BlogController::class, 'createBlogPost'])->name('blog.post.create');
     Route::post('blog/post/store', [BlogController::class, 'storeBlogPost'])->name('blog.post.store');
+    //Setting : Smtp Section
+    Route::get('setting/smtp', [SettingController::class, 'settingSmtp'])->name('setting.smtp');
+    Route::post('setting/smtp/update', [SettingController::class, 'settingSmtpUpdate'])->name('setting.smtp.update');
 
     //Role & Permisson Section
     Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission')->middleware('permission:role_permission.menu');
