@@ -87,6 +87,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('blog/category', [BlogController::class, 'indexBlogCategory'])->name('blog.category.index');
     Route::get('blog/category/create', [BlogController::class, 'createBlogCategory'])->name('blog.category.create');
     Route::post('blog/category/store', [BlogController::class, 'storeBlogCategory'])->name('blog.category.store');
+    //Blog Post Section
+    Route::get('blog/post', [BlogController::class, 'indexBlogPost'])->name('blog.post.index');
+    Route::get('blog/post/create', [BlogController::class, 'createBlogPost'])->name('blog.post.create');
+    Route::post('blog/post/store', [BlogController::class, 'storeBlogPost'])->name('blog.post.store');
 
     //Role & Permisson Section
     Route::get('all-permission', [RoleController::class, 'allPermission'])->name('all.permission')->middleware('permission:role_permission.menu');

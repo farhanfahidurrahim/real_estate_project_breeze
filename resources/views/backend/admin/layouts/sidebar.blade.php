@@ -160,6 +160,9 @@
                         <li class="nav-item">
                             <a href="{{ route('blog.category.index') }}" class="nav-link">Add Blog Category</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('blog.post.index') }}" class="nav-link">All Blog Post</a>
+                        </li>
                     </ul>
                 </div>
             </li>

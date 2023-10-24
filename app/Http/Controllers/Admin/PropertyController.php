@@ -69,7 +69,7 @@ class PropertyController extends Controller
 
         $amenitiesArray = $request->amenities_id;
         $amenitiesToString = implode(",", $amenitiesArray);
-        // dd($amenities);
+        // dd($amenitiesToString);
 
         $slug = Str::of($request->property_name)->slug('-');
 
