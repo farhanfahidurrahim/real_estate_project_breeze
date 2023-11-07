@@ -40,7 +40,27 @@ class RolePermissionTableSeeder extends Seeder
                 'group_name' => 'amenity',
             ],
             [
+                'name' => 'amenity.all',
+                'guard_name' => 'web',
+                'group_name' => 'amenity',
+            ],
+            [
+                'name' => 'amenity.add',
+                'guard_name' => 'web',
+                'group_name' => 'amenity',
+            ],
+            [
                 'name' => 'property.menu',
+                'guard_name' => 'web',
+                'group_name' => 'property',
+            ],
+            [
+                'name' => 'property.all',
+                'guard_name' => 'web',
+                'group_name' => 'property',
+            ],
+            [
+                'name' => 'property.add',
                 'guard_name' => 'web',
                 'group_name' => 'property',
             ],
@@ -83,6 +103,22 @@ class RolePermissionTableSeeder extends Seeder
             ],
             [
                 'permission_id' => '7',
+                'role_id' => '1',
+            ],
+            [
+                'permission_id' => '8',
+                'role_id' => '1',
+            ],
+            [
+                'permission_id' => '9',
+                'role_id' => '1',
+            ],
+            [
+                'permission_id' => '10',
+                'role_id' => '1',
+            ],
+            [
+                'permission_id' => '11',
                 'role_id' => '1',
             ],
         ]);

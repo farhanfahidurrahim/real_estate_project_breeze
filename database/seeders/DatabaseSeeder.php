@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\SmtpSetting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,8 +22,11 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(UsersTableSeeder::class);
-        $this->call(TypeTableSeeder::class);
-        $this->call(RolePermissionTableSeeder::class);
         \App\Models\User::factory(5)->create();
+        $this->call(TypeTableSeeder::class);
+        $this->call(AmenityTableSeeder::class);
+        $this->call(PropertyTableSeeder::class);
+        $this->call(SettingTableSeeder::class);
+        $this->call(RolePermissionTableSeeder::class);
     }
 }
