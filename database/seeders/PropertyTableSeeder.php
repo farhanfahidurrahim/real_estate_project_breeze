@@ -36,7 +36,7 @@ class PropertyTableSeeder extends Seeder
             'city' => 'Kishoreganj',
             'state' => 'Dhaka',
             'postal_code' => '2300',
-            'neighborhood' => '',
+            'neighborhood' => '2',
             'latitude' => '3651.79512.63214',
             'longitude' => '9452.45845.5491',
             'featured' => '1',
