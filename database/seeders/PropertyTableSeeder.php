@@ -24,7 +24,7 @@ class PropertyTableSeeder extends Seeder
             'lowest_price' => '500',
             'maximum_price' => '50000',
             'property_thumbnail' => 'img here',
-            'short_description' => 'This is short description',
+            'short_description' => 'Lorem short desc ipsum dolor sit amet consectetur adipisicing sed.',
             'long_description' => 'This is long description',
             'bedrooms' => '4',
             'bathrooms' => '4',
@@ -42,7 +42,7 @@ class PropertyTableSeeder extends Seeder
             'featured' => '1',
             'hot' => '1',
             'agent_id' => '2',
-            'status' => 'active',
+            'status' => 1,
         ]);
 
         MultiImage::create([

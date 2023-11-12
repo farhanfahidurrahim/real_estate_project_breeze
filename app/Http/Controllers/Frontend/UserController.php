@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        return view('frontend.index');
-    }
-
     public function signIn()
     {
         return view('auth.login');

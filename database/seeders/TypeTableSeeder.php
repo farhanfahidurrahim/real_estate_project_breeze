@@ -15,24 +15,40 @@ class TypeTableSeeder extends Seeder
     {
         Type::insert([
             [
-                'type_name' => 'Abc',
+                'type_name' => 'Residential',
                 'type_icon' => 'icon-1',
             ],
             [
-                'type_name' => 'Cde',
+                'type_name' => 'Commercial',
                 'type_icon' => 'icon-2',
             ],
             [
-                'type_name' => 'Efg',
+                'type_name' => 'Apartment',
                 'type_icon' => 'icon-3',
             ],
             [
-                'type_name' => 'Ghi',
+                'type_name' => 'Industrial',
                 'type_icon' => 'icon-4',
             ],
             [
-                'type_name' => 'Ijk',
+                'type_name' => 'Office',
                 'type_icon' => 'icon-5',
+            ],
+            [
+                'type_name' => 'Floor',
+                'type_icon' => 'icon-6',
+            ],
+            [
+                'type_name' => 'Duplex',
+                'type_icon' => 'icon-7',
+            ],
+            [
+                'type_name' => 'Building',
+                'type_icon' => 'icon-8',
+            ],
+            [
+                'type_name' => 'Warehouse',
+                'type_icon' => 'icon-9',
             ],
         ]);
     }

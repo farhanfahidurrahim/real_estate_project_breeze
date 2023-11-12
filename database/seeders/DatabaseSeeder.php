@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeTableSeeder::class);
         $this->call(AmenityTableSeeder::class);
         $this->call(PropertyTableSeeder::class);
+        \App\Models\Property::factory(25)->create();
         $this->call(SettingTableSeeder::class);
         $this->call(RolePermissionTableSeeder::class);
     }

@@ -12,6 +12,7 @@ use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Agent\BuyPackageController;
 use App\Http\Controllers\Agent\PackageController;
+use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -30,9 +31,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //_____Frontend/User Route_________
-Route::get('/', [UserController::class, 'index']);
-Route::get('/sign-in', [UserController::class, 'signIn'])->name('signin');
+Route::get('/', [IndexController::class, 'index']);
 
+Route::get('/sign-in', [UserController::class, 'signIn'])->name('signin');
 Route::get('/dashboard', function (){ return view('dashboard'); })->middleware(['auth', 'verified'])->name('dashboard');
 Route::group(['prefix'=>'user', 'middleware' => 'auth'], function(){
     Route::get('profile-edit', [UserController::class, 'editUserProfile'])->name('user.profile.edit');
