@@ -30,8 +30,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-//_____Frontend/User Route_________
+//_____Frontend / User Route_________
 Route::get('/', [IndexController::class, 'index']);
+Route::get('property/details/{id}/{slug}', [IndexController::class, 'propertyDetails'])->name('property.details');
 
 Route::get('/sign-in', [UserController::class, 'signIn'])->name('signin');
 Route::get('/dashboard', function (){ return view('dashboard'); })->middleware(['auth', 'verified'])->name('dashboard');

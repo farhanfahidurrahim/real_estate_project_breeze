@@ -15,22 +15,40 @@ class AmenityTableSeeder extends Seeder
     {
         Amenity::insert([
             [
-                'amenity_name' => 'Fahi',
+                'amenity_name' => 'Air Conditioning',
             ],
             [
-                'amenity_name' => 'Dur',
+                'amenity_name' => 'Cleaning Service',
             ],
             [
-                'amenity_name' => 'Rhm',
+                'amenity_name' => 'Dishwasher',
             ],
             [
-                'amenity_name' => 'Frn',
+                'amenity_name' => 'Hardwood Flows',
             ],
             [
-                'amenity_name' => 'Frn',
+                'amenity_name' => 'Swimming Pool',
             ],
             [
-                'amenity_name' => 'Frf',
+                'amenity_name' => 'Outdoor Shower',
+            ],
+            [
+                'amenity_name' => 'Pet Friendly',
+            ],
+            [
+                'amenity_name' => 'Basketball Court',
+            ],
+            [
+                'amenity_name' => 'Refrigerator',
+            ],
+            [
+                'amenity_name' => 'Gym',
+            ],
+            [
+                'amenity_name' => 'CCTv Camera',
+            ],
+            [
+                'amenity_name' => 'Security Guard',
             ],
         ]);
     }

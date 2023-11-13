@@ -15,4 +15,10 @@ class IndexController extends Controller
         $properties = Property::where('status', '1')->where('featured','1')->latest()->limit(3)->get();
         return view('frontend.index', compact('types','properties'));
     }
+
+    public function propertyDetails($id, $slug)
+    {
+        $property = Property::findOrFail($id);
+        return view('frontend.property.property_details', compact('property'));
+    }
 }
