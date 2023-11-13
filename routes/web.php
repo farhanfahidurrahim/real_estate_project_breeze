@@ -80,6 +80,8 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::post('property/store', [PropertyController::class, 'store'])->name('property.store')->middleware('permission:property.all');
     Route::get('property/show/{id}', [PropertyController::class, 'show'])->name('property.show')->middleware('permission:property.all');
     Route::get('property/edit/{id}', [PropertyController::class, 'edit'])->name('property.edit');
+    Route::post('property/update/{id}', [PropertyController::class, 'update'])->name('property.update');
+    Route::post('property/update/thumbnail', [PropertyController::class, 'updateThumbnail'])->name('property.update.thumbnail');
     //Package History Section
     Route::get('package/history', [BuyPackageController::class, 'adminPackageHistory'])->name('package.history');
     Route::get('package/package/downlaod/{id}', [BuyPackageController::class, 'adminPackageInvoiceDownload'])->name('package.invoice.downlaod');

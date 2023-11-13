@@ -19,6 +19,10 @@ class IndexController extends Controller
     public function propertyDetails($id, $slug)
     {
         $property = Property::findOrFail($id);
-        return view('frontend.property.property_details', compact('property'));
+        $amenities = $property->amenities_id;
+        $prop_amenities = explode(',',$amenities);
+        // $facilities =
+
+        return view('frontend.property.property_details', compact('property','prop_amenities'));
     }
 }

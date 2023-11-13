@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PropertyRequest;
 use App\Models\Facility;
 use App\Models\MultiImage;
 use Intervention\Image\Facades\Image;
@@ -163,24 +164,64 @@ class PropertyController extends Controller
     public function edit(string $id)
     {
         $data = Property::findOrFail($id);
+
+        $amenitiesString = $data->amenities_id;
+        $amenitiesArray = explode(',',$amenitiesString);
+
         $propertyType = Type::latest()->get();
         $amenities = Amenity::latest()->get();
         $activeAgent = User::where('status','active')->where('role','agent')->get();
-        return view('backend.admin.property.edit', compact('data','propertyType', 'amenities','activeAgent'));
+        return view('backend.admin.property.edit', compact('data','propertyType', 'amenities','amenitiesArray','activeAgent'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PropertyRequest $request, string $id)
     {
-        //
+        // return $request->all();
+        $amenitiesArray = $request->amenities_id;
+        $amenitiesToString = implode(',',$amenitiesArray);
+
+        $slug = Str::of($request->property_name)->slug('-');
+
+        Property::findOrFail($id)->update([
+            'ptype_id' => $request->ptype_id,
+            'amenities_id' => $amenitiesToString,
+            'property_name' => $request->property_name,
+            'property_slug' => $slug,
+            'property_status' => $request->property_status,
+            'lowest_price' => $request->lowest_price,
+            'maximum_price' => $request->maximum_price,
+            'short_description' => $request->short_description,
+            'long_description' => $request->long_description,
+            'bedrooms' => $request->bedrooms,
+            'bathrooms' => $request->bathrooms,
+            'garage' => $request->garage,
+            'garage_size' => $request->garage_size,
+            'property_size' => $request->property_size,
+            'property_video' => $request->property_video,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'neighborhood' => $request->neighborhood,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'featured' => $request->featured,
+            'hot' => $request->hot,
+            'agent_id' => $request->agent_id,
+        ]);
+
+        $notification = array(
+            'message' => "Property Updated Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('property.index')->with($notification);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function updateThumbnail(string $id)
     {
         //
     }

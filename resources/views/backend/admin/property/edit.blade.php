@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">Edit Property</h6>
-                        <form method="POST" action="{{ route('property.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('property.update', $data->id) }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
@@ -71,34 +71,6 @@
                                 <!-- Col -->
                             </div><!-- Row -->
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Main Thumbnail</label>
-                                        <input type="file" name="property_thumbnail"
-                                            class="form-control @error('property_thumbnail') is-invalid @enderror"
-                                            onChange="mainThumbUrl(this)">
-                                        <img src="" id="mainThumb">
-                                        @error('property_thumbnail')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- Col -->
-                                <div class="col-sm-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Multiple Image</label>
-                                        <input type="file" name="multi_img[]"
-                                            class="form-control @error('multi_img') is-invalid @enderror" id="multiImg"
-                                            multiple="">
-                                        @error('multi_img')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                        <div class="row" id="preview_img"></div>
-                                    </div>
-                                </div>
-                                <!-- Col -->
-                            </div><!-- Row -->
 
                             <div class="row">
                                 <div class="col-sm-3">
@@ -252,7 +224,9 @@
                                             id="exampleFormControlSelect1">
                                             <option selected="" disabled="">Select Type</option>
                                             @foreach ($propertyType as $row)
-                                                <option value="{{ $row->id }}" {{ $data->ptype_id == $row->id ? 'selected' : '' }}>{{ $row->type_name }}</option>
+                                                <option value="{{ $row->id }}"
+                                                    {{ $data->ptype_id == $row->id ? 'selected' : '' }}>
+                                                    {{ $row->type_name }}</option>
                                             @endforeach
                                         </select>
                                         @error('ptype_id')
@@ -266,8 +240,10 @@
                                         <select name="amenities_id[]"
                                             class="js-example-basic-multiple form-select @error('amenities_id') is-invalid @enderror"
                                             multiple="multiple" data-width="100%">
-                                            @foreach ($amenities as $row)
-                                                <option value="{{ $row->id }}" {{ $data->amenities_id == $row->id ? 'selected' : '' }}>{{ $row->amenity_name }}</option>
+                                            @foreach ($amenities as $item)
+                                                <option value="{{ $item->id }}"
+                                                    {{ in_array($item->id, $amenitiesArray) ? 'selected' : '' }}>
+                                                    {{ $item->amenity_name }}</option>
                                             @endforeach
                                         </select>
                                         @error('amenities_id')
@@ -283,7 +259,9 @@
                                             id="exampleFormControlSelect1">
                                             <option selected="" disabled="">Select Agent</option>
                                             @foreach ($activeAgent as $row)
-                                                <option value="{{ $row->id }}" {{ $data->agent_id == $row->id ? 'selected' : '' }}>{{ $row->name }}</option>
+                                                <option value="{{ $row->id }}"
+                                                    {{ $data->agent_id == $row->id ? 'selected' : '' }}>
+                                                    {{ $row->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('agent_id')
@@ -323,16 +301,18 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="checkInline1">Feature
                                                 Property</label>
-                                            <input type="checkbox" name="featured" class="form-check-input"
-                                                id="checkInline1" value="0">
+                                            <input type="checkbox" name="featured" value="1"
+                                                class="form-check-input" id="checkInline1"
+                                                {{ $data->featured == '1' ? 'checked' : '' }}>
                                             @error('featured')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="checkInline2">Hot Property</label>
-                                            <input type="checkbox" name="hot" class="form-check-input"
-                                                id="checkInline2" value="1">
+                                            <input type="checkbox" name="hot" value="1"
+                                                class="form-check-input" id="checkInline2"
+                                                {{ $data->hot == '1' ? 'checked' : '' }}>
                                             @error('hot')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -340,83 +320,44 @@
                                     </div>
                                 </div><!-- Col -->
                             </div><!-- Row -->
-                            <!--========== Facilities ==============-->
+                            <button type="submit" class="btn btn-primary submit">Update...</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Edit Main Thumbnail</h6>
+                        <form method="POST" action="{{ route('property.update.thumbnail') }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $data->id }}">
+                            <input type="hidden" name="old_thumbnail" value="{{ $data->property_thumbnail }}">
                             <div class="row">
-                                <div class="row add_item">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="facility_name" class="form-label">Facilities </label>
-                                            <select name="facility_name[]" id="facility_name" class="form-control">
-                                                <option selected disabled>Select Facility</option>
-                                                <option value="Hospital">Hospital</option>
-                                                <option value="SuperMarket">Super Market</option>
-                                                <option value="School">School</option>
-                                                <option value="Entertainment">Entertainment</option>
-                                                <option value="Pharmacy">Pharmacy</option>
-                                                <option value="Airport">Airport</option>
-                                                <option value="Railways">Railways</option>
-                                                <option value="Bus Stop">Bus Stop</option>
-                                                <option value="Beach">Beach</option>
-                                                <option value="Mall">Mall</option>
-                                                <option value="Bank">Bank</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="distance" class="form-label"> Distance </label>
-                                            <input type="text" name="distance[]" id="distance" class="form-control"
-                                                placeholder="Distance (Km)">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-4" style="padding-top: 30px;">
-                                        <a class="btn btn-success addeventmore"><i class="fa fa-plus-circle"></i> Add
-                                            More..</a>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <input type="file" name="property_thumbnail"
+                                            class="form-control"
+                                            onChange="mainThumbUrl(this)" accept="image/*"><br>
+                                        <label class="form-label">New Thumbnail :</label>
+                                        <img src="" id="mainThumb">
                                     </div>
                                 </div>
-                            </div>
-                            <!--========== Facilities Ajax ==============-->
-                            <div style="visibility: hidden">
-                                <div class="whole_extra_item_add" id="whole_extra_item_add">
-                                    <div class="whole_extra_item_delete" id="whole_extra_item_delete">
-                                        <div class="container mt-2">
-                                            <div class="row">
-
-                                                <div class="form-group col-md-4">
-                                                    <label for="facility_name">Facilities</label>
-                                                    <select name="facility_name[]" id="facility_name"
-                                                        class="form-control">
-                                                        <option value="">Select Facility</option>
-                                                        <option value="Hospital">Hospital</option>
-                                                        <option value="SuperMarket">Super Market</option>
-                                                        <option value="School">School</option>
-                                                        <option value="Entertainment">Entertainment</option>
-                                                        <option value="Pharmacy">Pharmacy</option>
-                                                        <option value="Airport">Airport</option>
-                                                        <option value="Railways">Railways</option>
-                                                        <option value="Bus Stop">Bus Stop</option>
-                                                        <option value="Beach">Beach</option>
-                                                        <option value="Mall">Mall</option>
-                                                        <option value="Bank">Bank</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="distance">Distance</label>
-                                                    <input type="text" name="distance[]" id="distance"
-                                                        class="form-control" placeholder="Distance (Km)">
-                                                </div>
-                                                <div class="form-group col-md-4" style="padding-top: 20px">
-                                                    <span class="btn btn-success btn-sm addeventmore"><i
-                                                            class="fa fa-plus-circle">Add</i></span>
-                                                    <span class="btn btn-danger btn-sm removeeventmore"><i
-                                                            class="fa fa-minus-circle">Remove</i></span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Present Thumbnail :</label>
+                                    </div>
+                                    <div>
+                                        <img src="{{ asset('upload/images/thumbnail/' . $data->property_thumbnail) }}"
+                                            alt="thumbnail">
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary submit">Save...</button>
+                            </div><!-- Row -->
+                            <button type="submit" class="btn btn-primary submit">Update...</button>
                         </form>
                     </div>
                 </div>
@@ -425,66 +366,17 @@
     </div>
 
 @section('script')
-    {{-- Single Thumnail Image --}}
+    <!------- Single Thumbnail Image Choose ------->
     <script>
         function mainThumbUrl(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#mainThumb').attr('src', e.target.result).width(80).height(80);
+                    $('#mainThumb').attr('src', e.target.result).width(150).height(100);
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
-
-    <!------- Multiple Image Choose ------->
-    <script>
-        $(document).ready(function() {
-            $('#multiImg').on('change', function() { //on file input change
-                if (window.File && window.FileReader && window.FileList && window
-                    .Blob) //check File API supported browser
-                {
-                    var data = $(this)[0].files; //this file data
-
-                    $.each(data, function(index, file) { //loop though each file
-                        if (/(\.|\/)(gif|jpe?g|png|webp)$/i.test(file
-                                .type)) { //check supported file type
-                            var fRead = new FileReader(); //new filereader
-                            fRead.onload = (function(file) { //trigger function on successful read
-                                return function(e) {
-                                    var img = $('<img/>').addClass('thumb').attr('src',
-                                            e.target.result).width(100)
-                                        .height(80); //create image element
-                                    $('#preview_img').append(
-                                        img); //append image to output element
-                                };
-                            })(file);
-                            fRead.readAsDataURL(file); //URL representing the file's data.
-                        }
-                    });
-
-                } else {
-                    alert("Your browser doesn't support File API!"); //if File API is absent
-                }
-            });
-        });
-    </script>
-
-    <!------- Facilities Ajax ------->
-    <script>
-        $(document).ready(function() {
-            var counter = 0;
-            $(document).on("click", ".addeventmore", function() {
-                var whole_extra_item_add = $("#whole_extra_item_add").html();
-                $(this).closest(".add_item").append(whole_extra_item_add);
-                counter++;
-            });
-            $(document).on("click", ".removeeventmore", function(event) {
-                $(this).closest("#whole_extra_item_delete").remove();
-                counter -= 1
-            });
-        });
     </script>
 @endsection
 @endsection

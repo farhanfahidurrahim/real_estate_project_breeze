@@ -95,6 +95,15 @@
                             </div><!-- Row -->
 
                             <div class="row">
+                                {{-- <div class="col-sm-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">Rooms</label>
+                                        <input type="number" name="bedrooms" value="{{ old('bedrooms') }}" class="form-control @error('bedrooms') is-invalid @enderror" placeholder="Enter bedrooms">
+                                        @error('bedrooms')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div><!-- Col --> --}}
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label class="form-label">Bedrooms</label>
@@ -396,7 +405,7 @@
 
 @section('script')
 
-    {{-- Single Thumnail Image --}}
+    <!------- Single Thumbnail Image Choose ------->
     <script>
         function mainThumbUrl(input) {
             if (input.files && input.files[0]) {
