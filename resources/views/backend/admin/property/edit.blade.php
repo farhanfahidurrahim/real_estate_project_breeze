@@ -14,8 +14,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">Edit Property</h6>
-                        <form method="POST" action="{{ route('property.update', $data->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('property.update') }}" enctype="multipart/form-data">
                             @csrf
+
+                            <input type="hidden" name="id" value="{{ $data->id }}">
 
                             <div class="row">
                                 <div class="col-sm-6">
@@ -326,17 +328,20 @@
                 </div>
             </div>
         </div>
-        <hr>
+    </div>
+    <div class="page-content">
         <div class="row">
             <div class="col-md-12 stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">Edit Main Thumbnail</h6>
-                        <form method="POST" action="{{ route('property.update.thumbnail') }}"
+                        <form method="POST" action="{{ route('property.update.thumbnail') }}" id="MyForm"
                             enctype="multipart/form-data">
                             @csrf
+
                             <input type="hidden" name="id" value="{{ $data->id }}">
                             <input type="hidden" name="old_thumbnail" value="{{ $data->property_thumbnail }}">
+
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
@@ -352,8 +357,8 @@
                                         <label class="form-label">Present Thumbnail :</label>
                                     </div>
                                     <div>
-                                        <img src="{{ asset('upload/images/thumbnail/' . $data->property_thumbnail) }}"
-                                            alt="thumbnail">
+                                        <img src="{{ asset('upload/images/property/thumbnail/' . $data->property_thumbnail) }}"
+                                            alt="thumbnail" style="width: 200px; hieght: 150px">
                                     </div>
                                 </div>
                             </div><!-- Row -->

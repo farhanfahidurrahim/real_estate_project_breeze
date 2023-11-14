@@ -80,8 +80,9 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::post('property/store', [PropertyController::class, 'store'])->name('property.store')->middleware('permission:property.all');
     Route::get('property/show/{id}', [PropertyController::class, 'show'])->name('property.show')->middleware('permission:property.all');
     Route::get('property/edit/{id}', [PropertyController::class, 'edit'])->name('property.edit');
-    Route::post('property/update/{id}', [PropertyController::class, 'update'])->name('property.update');
+    Route::post('property/update', [PropertyController::class, 'update'])->name('property.update');
     Route::post('property/update/thumbnail', [PropertyController::class, 'updateThumbnail'])->name('property.update.thumbnail');
+
     //Package History Section
     Route::get('package/history', [BuyPackageController::class, 'adminPackageHistory'])->name('package.history');
     Route::get('package/package/downlaod/{id}', [BuyPackageController::class, 'adminPackageInvoiceDownload'])->name('package.invoice.downlaod');
@@ -89,6 +90,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('testimonial', [TestimonialController::class, 'index'])->name('testimonial.index');
     Route::get('testimonial/create', [TestimonialController::class, 'create'])->name('testimonial.create');
     Route::post('testimonial/store', [TestimonialController::class, 'store'])->name('testimonial.store');
+
     //Blog Category Section
     Route::get('blog/category', [BlogController::class, 'indexBlogCategory'])->name('blog.category.index');
     Route::get('blog/category/create', [BlogController::class, 'createBlogCategory'])->name('blog.category.create');
@@ -97,6 +99,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('blog/post', [BlogController::class, 'indexBlogPost'])->name('blog.post.index');
     Route::get('blog/post/create', [BlogController::class, 'createBlogPost'])->name('blog.post.create');
     Route::post('blog/post/store', [BlogController::class, 'storeBlogPost'])->name('blog.post.store');
+
     //Setting : Smtp Section
     Route::get('setting/smtp', [SettingController::class, 'settingSmtp'])->name('setting.smtp');
     Route::post('setting/smtp/update', [SettingController::class, 'settingSmtpUpdate'])->name('setting.smtp.update');

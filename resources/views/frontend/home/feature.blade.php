@@ -14,7 +14,7 @@
                         <div class="inner-box">
                             <div class="image-box">
                                 <figure class="image"><img
-                                        src="{{ !empty($item->property_thumbnail) ? $item->property_thumbnail : url('upload/images/property/' . $item->property_thumbnail) }}"
+                                        src="{{ !empty($item->property_thumbnail) ? url('upload/images/property/thumbnail/'.$item->property_thumbnail) : url('upload/images/no_image.jpg') }}"
                                         alt="">
                                         {{-- src="{{ !empty($item->property_thumbnail) ? url('upload/images/property/' . $item->property_thumbnail) : url('upload/images/no_image.jpg') }}"
                                         alt=""> --}}

@@ -177,9 +177,12 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PropertyRequest $request, string $id)
+    public function update(Request $request)
     {
         // return $request->all();
+
+        $id = $request->id;
+
         $amenitiesArray = $request->amenities_id;
         $amenitiesToString = implode(',',$amenitiesArray);
 
@@ -221,8 +224,31 @@ class PropertyController extends Controller
         return redirect()->route('property.index')->with($notification);
     }
 
-    public function updateThumbnail(string $id)
+    public function updateThumbnail(Request $request)
     {
-        //
+        $id = $request->id;
+        $oldThumbnail = $request->old_thumbnail;
+
+        //Image Part
+        $image = $request->file('property_thumbnail');
+        $imgName = hexdec(uniqid()).'.'.$image->getClientOriginalName();
+        Image::make($image)->resize(370,250)->save('upload/images/property/thumbnail/'.$imgName);
+
+        $imgPath = public_path('upload/images/property/thumbnail/'.$oldThumbnail);
+        if (file_exists($imgPath)) {
+            unlink($imgPath);
+        }
+
+        Property::findOrFail($id)->update([
+            'property_thumbnail' => $imgName,
+            'updated_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => "Property Thumbnail Image Updated Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('property.index')->with($notification);
     }
 }

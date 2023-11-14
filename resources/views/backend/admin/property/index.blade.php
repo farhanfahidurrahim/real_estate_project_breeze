@@ -33,7 +33,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ !empty($row->property_thumbnail) ? url('upload/images/property/thumbnail/'.$row->property_thumbnail) : url('upload/images/no_image.jpg') }}">
+                                                <img src="{{ !empty($row->property_thumbnail) ? url('upload/images/property/thumbnail/'.$row->property_thumbnail) : url('upload/images/no_image.jpg') }}" style="width: 75px; height: 75px;">
                                             </td>
                                             <td>{{ $row->property_name }}</td>
                                             <td>{{ $row->type->type_name }}</td>
