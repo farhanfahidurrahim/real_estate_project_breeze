@@ -171,7 +171,9 @@ class PropertyController extends Controller
         $propertyType = Type::latest()->get();
         $amenities = Amenity::latest()->get();
         $activeAgent = User::where('status','active')->where('role','agent')->get();
-        return view('backend.admin.property.edit', compact('data','propertyType', 'amenities','amenitiesArray','activeAgent'));
+        $multiImage = MultiImage::where('property_id',$id)->get();
+
+        return view('backend.admin.property.edit', compact('data','propertyType', 'amenities','amenitiesArray','activeAgent', 'multiImage'));
     }
 
     /**
@@ -250,5 +252,67 @@ class PropertyController extends Controller
         );
 
         return redirect()->route('property.index')->with($notification);
+    }
+
+    public function updateMultiImage(Request $request)
+    {
+        $images = $request->multi_img;
+        foreach ($images as $id => $img) {
+            $imgDel = MultiImage::findOrFail($id);
+            $imgPath = public_path('upload/images/property/multiple/'.$imgDel->photo_name);
+            unlink($imgPath);
+
+            $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalName();
+            Image::make($img)->resize(770,520)->save('upload/images/property/multiple/'.$imgName);
+
+            MultiImage::where('id',$id)->update([
+                'photo_name' => $imgName,
+                'updated_at'=> Carbon::now(),
+            ]);
+        }
+
+        $notification = array(
+            'message' => "Multiple Image Updated Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function deleteMultiImage(Request $request, $id)
+    {
+        $oldImage = MultiImage::findOrFail($id);
+        $imgPath = public_path('upload/images/property/thumbnail/'.$oldImage->photo_name);
+        unlink($imgPath);
+
+        MultiImage::findOrFail($id)->delete();
+        $notification = array(
+            'message' => "Multiple Image Delete Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function addMultiImage(Request $request)
+    {
+        $pid = $request->propertyId;
+        $img = $request->file('multi_img');
+
+        $imgName = hexdec(uniqid()).'.'.$img->getClientOriginalName();
+        Image::make($img)->resize(770,520)->save('upload/images/property/multiple/'.$imgName);
+
+        MultiImage::insert([
+            'property_id' => $pid,
+            'photo_name' => $imgName,
+            'created_at'=> Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => "Image Added Succesfully!",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
     }
 }

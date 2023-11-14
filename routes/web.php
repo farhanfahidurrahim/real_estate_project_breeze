@@ -82,6 +82,9 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'role_aux:admin']], fu
     Route::get('property/edit/{id}', [PropertyController::class, 'edit'])->name('property.edit');
     Route::post('property/update', [PropertyController::class, 'update'])->name('property.update');
     Route::post('property/update/thumbnail', [PropertyController::class, 'updateThumbnail'])->name('property.update.thumbnail');
+    Route::post('property/update/multiimage', [PropertyController::class, 'updateMultiImage'])->name('property.update.multiimage');
+    Route::get('property/delete/multiimage/{id}', [PropertyController::class, 'deleteMultiImage'])->name('property.delete.multiimage');
+    Route::post('property/add/multiimage', [PropertyController::class, 'addMultiImage'])->name('property.add.multiimage');
 
     //Package History Section
     Route::get('package/history', [BuyPackageController::class, 'adminPackageHistory'])->name('package.history');

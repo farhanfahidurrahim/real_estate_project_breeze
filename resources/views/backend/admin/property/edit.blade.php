@@ -368,6 +368,75 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Edit Multiple Image</h6>
+                        <form method="POST" action="{{ route('property.update.multiimage') }}"
+                            enctype="multipart/form-data">
+                            @csrf
+
+                            <input type="hidden" name="id" value="{{ $data->id }}">
+                            <input type="hidden" name="old_thumbnail" value="{{ $data->property_thumbnail }}">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Image</th>
+                                            <th>Change Image</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($multiImage as $key=>$img)
+                                        <tr>
+                                            <td>{{ $key+1 }}</td>
+                                            <td class="py-1">
+                                                <img src="{{ asset('upload/images/property/multiple/'.$img->photo_name) }}" alt="image" style="width: 65px; height:65px;">
+                                            </td>
+                                            <td>
+                                                <input type="file" name="multi_img[{{$img->id}}]" class="form-control" accept="image/*">
+                                            </td>
+                                            <td>
+                                                <input type="submit" class="btn btn-primary" value="Update Image">
+                                                <a href="{{ route('property.delete.multiimage',$img->id) }}" class="btn btn-danger" id="delete">Delete</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                        </form>
+
+                        <form method="POST" action="{{ route('property.add.multiimage') }}"
+                            enctype="multipart/form-data">
+                            @csrf
+
+                            <input type="hidden" name="propertyId" value="{{ $data->id }}">
+
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <input type="file" name="multi_img" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="submit" class="btn btn-primary" value="Add Image">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 @section('script')
