@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Type;
+use App\Models\Amenity;
+use App\Models\Property;
+use App\Models\MultiImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Property;
 
 class IndexController extends Controller
 {
@@ -19,10 +21,12 @@ class IndexController extends Controller
     public function propertyDetails($id, $slug)
     {
         $property = Property::findOrFail($id);
+        $multiImage = MultiImage::where('property_id',$id)->get();
         $amenities = $property->amenities_id;
         $prop_amenities = explode(',',$amenities);
-        // $facilities =
+        // dd($prop_amenities);
+        $amenityNames = Amenity::whereIn('id', $prop_amenities)->pluck('amenity_name'); // Fetch amenity names from the database
 
-        return view('frontend.property.property_details', compact('property','prop_amenities'));
+        return view('frontend.property.property_details', compact('property','multiImage','amenityNames'));
     }
 }

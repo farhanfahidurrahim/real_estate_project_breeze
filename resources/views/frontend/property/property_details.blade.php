@@ -69,12 +69,10 @@
                     <div class="property-details-content">
                         <div class="carousel-inner">
                             <div class="single-item-carousel owl-carousel owl-theme owl-dots-none">
-                                <figure class="image-box"><img src="assets/images/resource/property-details-1.jpg"
-                                        alt=""></figure>
-                                <figure class="image-box"><img src="assets/images/resource/property-details-1.jpg"
-                                        alt=""></figure>
-                                <figure class="image-box"><img src="assets/images/resource/property-details-1.jpg"
-                                        alt=""></figure>
+                                @foreach ($multiImage as $img)
+                                <figure class="image-box"><img src="{{ asset('upload/images/property/multiple/'.$img->photo_name) }}"
+                                    alt=""></figure>
+                                @endforeach
                             </div>
                         </div>
                         <div class="discription-box content-widget">
@@ -114,7 +112,7 @@
                                 <h4>Amenities</h4>
                             </div>
                             <ul class="list clearfix">
-                                @foreach ($prop_amenities as $item)
+                                @foreach ($amenityNames as $item)
                                     <li>{{ $item }}</li>
                                 @endforeach
                             </ul>
@@ -235,17 +233,32 @@
                     <div class="property-sidebar default-sidebar">
                         <div class="author-widget sidebar-widget">
                             <div class="author-box">
-                                <figure class="author-thumb"><img src="assets/images/resource/author-1.jpg"
+
+                                @if ($property->agent_id == NULL)
+                                    <figure class="author-thumb"><img src="assets/images/resource/author-1.jpg"
                                         alt=""></figure>
-                                <div class="inner">
-                                    <h4>Michael Bean</h4>
-                                    <ul class="info clearfix">
-                                        <li><i class="fas fa-map-marker-alt"></i>84 St. John Wood High Street,
-                                            St Johns Wood</li>
-                                        <li><i class="fas fa-phone"></i><a href="tel:03030571965">030 3057 1965</a></li>
-                                    </ul>
-                                    <div class="btn-box"><a href="agents-details.html">View Listing</a></div>
-                                </div>
+                                    <div class="inner">
+                                        <h4>Admin</h4>
+                                        <ul class="info clearfix">
+                                            <li><i class="fas fa-map-marker-alt"></i>84 St. John Wood High Street,
+                                                St Johns Wood</li>
+                                            <li><i class="fas fa-phone"></i><a href="tel:03030571965">030 3057 1965</a></li>
+                                        </ul>
+                                        <div class="btn-box"><a href="agents-details.html">View Listing</a></div>
+                                    </div>
+                                @else
+                                    <figure class="author-thumb"><img src="assets/images/resource/author-1.jpg"
+                                            alt=""></figure>
+                                    <div class="inner">
+                                        <h4>{{ $property->agentName->name }}</h4>
+                                        <ul class="info clearfix">
+                                            <li><i class="fas fa-map-marker-alt"></i>{{ $property->agentName->address }}</li>
+                                            <li><i class="fas fa-phone"></i><a href="tel:03030571965">{{ $property->agentName->phone }}</a></li>
+                                        </ul>
+                                        <div class="btn-box"><a href="agents-details.html">View Listing</a></div>
+                                    </div>
+                                @endif
+
                             </div>
                             <div class="form-inner">
                                 <form action="property-details.html" method="post" class="default-form">
