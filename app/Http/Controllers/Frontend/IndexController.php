@@ -22,11 +22,16 @@ class IndexController extends Controller
     {
         $property = Property::findOrFail($id);
         $multiImage = MultiImage::where('property_id',$id)->get();
+
         $amenities = $property->amenities_id;
         $prop_amenities = explode(',',$amenities);
         // dd($prop_amenities);
-        $amenityNames = Amenity::whereIn('id', $prop_amenities)->pluck('amenity_name'); // Fetch amenity names from the database
+        $amenityNames = Amenity::whereIn('id', $prop_amenities)->pluck('amenity_name'); // fetch amenity names from DB
 
-        return view('frontend.property.property_details', compact('property','multiImage','amenityNames'));
+        $typeId = $property->ptype_id;
+        $relatedProperty = Property::where('ptype_id',$typeId)->where('id','!=', $id)->limit(3)->get();
+        // dd($relatedProperty);
+
+        return view('frontend.property.property_details', compact('property','multiImage','amenityNames','relatedProperty'));
     }
 }
